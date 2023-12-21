@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3a78b9f26f.js" crossorigin="anonymous" defer></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
 </head>
 
@@ -42,12 +44,14 @@
 
                 <input type="text" name="search" placeholder="Search" value="{{ old('search') }}"
                     class="px-3 py-1 border border-slate-300 outline-none rounded ">
-                <button type="submit" class="px-3 py-1 bg-primaryColor text-white rounded">Search</button>
+                <x-form.button>Search</x-form.button>
             </form>
         </ul>
     </nav>
 
-    {{ $slot }}
+    <main class="px-12 py-6">
+        {{ $slot }}
+    </main>
 
     <footer class="bg-slate-100 px-8 py-4">
         <div class="flex justify-between items-center">
