@@ -1,112 +1,112 @@
 <?php
-$categories = [
-    [
-        'id' => 1,
-        'name' => 'Man',
-    ],
-    [
-        'id' => 2,
-        'name' => 'Woman',
-    ],
-    [
-        'id' => 3,
-        'name' => 'Kids',
-    ],
-];
+// $categories = [
+//     [
+//         'id' => 1,
+//         'name' => 'Man',
+//     ],
+//     [
+//         'id' => 2,
+//         'name' => 'Woman',
+//     ],
+//     [
+//         'id' => 3,
+//         'name' => 'Kids',
+//     ],
+// ];
 
-$subCategories = [
-    [
-        'id' => 1,
-        'category_id' => 1,
-        'name' => 'T-Shirt',
-    ],
-    [
-        'id' => 2,
-        'category_id' => 2,
-        'name' => 'Shirt',
-    ],
-    [
-        'id' => 1,
-        'category_id' => 2,
-        'name' => 'Jeans',
-    ],
-    [
-        'id' => 2,
-        'category_id' => 1,
-        'name' => 'Shoes',
-    ],
-];
+// $subCategories = [
+//     [
+//         'id' => 1,
+//         'category_id' => 1,
+//         'name' => 'T-Shirt',
+//     ],
+//     [
+//         'id' => 2,
+//         'category_id' => 2,
+//         'name' => 'Shirt',
+//     ],
+//     [
+//         'id' => 1,
+//         'category_id' => 2,
+//         'name' => 'Jeans',
+//     ],
+//     [
+//         'id' => 2,
+//         'category_id' => 1,
+//         'name' => 'Shoes',
+//     ],
+// ];
 
-$products = [
-    [
-        'id' => '1',
-        'category_id' => '1',
-        'subcategory_id' => '1',
-        'name' => 'T-shirt',
-        'description' => 'lllllllllllllllllllllllllllllllllll',
-        'sizes' => [
-            [
-                'id' => '1',
-                'name' => 'S',
-            ],
-            [
-                'id' => '3',
-                'name' => 'XL',
-            ],
-        ],
-        'price' => '12',
-    ],
-    [
-        'id' => '2',
-        'category_id' => '2',
-        'subcategory_id' => '1',
-        'name' => 'Jeans',
-        'description' => 'lllllllllllllllllllllllllllllllllll',
-        'sizes' => [
-            [
-                'id' => '1',
-                'name' => 'S',
-            ],
-            [
-                'id' => '2',
-                'name' => 'L',
-            ],
-            [
-                'id' => '3',
-                'name' => 'XL',
-            ],
-        ],
-        'price' => '38',
-    ],
-    [
-        'id' => '3',
-        'category_id' => '2',
-        'subcategory_id' => '1',
-        'name' => 'Jacket',
-        'description' => 'lllllllllllllllllllllllllllllllllll',
-        'sizes' => [
-            [
-                'id' => '3',
-                'name' => 'XL',
-            ],
-        ],
-        'price' => '14',
-    ],
-    [
-        'id' => '4',
-        'category_id' => '2',
-        'subcategory_id' => '3',
-        'name' => 'Shirt',
-        'description' => 'lllllllllllllllllllllllllllllllllll',
-        'sizes' => [
-            [
-                'id' => '1',
-                'name' => 'S',
-            ],
-        ],
-        'price' => '120',
-    ],
-];
+// $products = [
+//     [
+//         'id' => '1',
+//         'category_id' => '1',
+//         'subcategory_id' => '1',
+//         'name' => 'T-shirt',
+//         'description' => 'lllllllllllllllllllllllllllllllllll',
+//         'sizes' => [
+//             [
+//                 'id' => '1',
+//                 'name' => 'S',
+//             ],
+//             [
+//                 'id' => '3',
+//                 'name' => 'XL',
+//             ],
+//         ],
+//         'price' => '12',
+//     ],
+//     [
+//         'id' => '2',
+//         'category_id' => '2',
+//         'subcategory_id' => '1',
+//         'name' => 'Jeans',
+//         'description' => 'lllllllllllllllllllllllllllllllllll',
+//         'sizes' => [
+//             [
+//                 'id' => '1',
+//                 'name' => 'S',
+//             ],
+//             [
+//                 'id' => '2',
+//                 'name' => 'L',
+//             ],
+//             [
+//                 'id' => '3',
+//                 'name' => 'XL',
+//             ],
+//         ],
+//         'price' => '38',
+//     ],
+//     [
+//         'id' => '3',
+//         'category_id' => '2',
+//         'subcategory_id' => '1',
+//         'name' => 'Jacket',
+//         'description' => 'lllllllllllllllllllllllllllllllllll',
+//         'sizes' => [
+//             [
+//                 'id' => '3',
+//                 'name' => 'XL',
+//             ],
+//         ],
+//         'price' => '14',
+//     ],
+//     [
+//         'id' => '4',
+//         'category_id' => '2',
+//         'subcategory_id' => '3',
+//         'name' => 'Shirt',
+//         'description' => 'lllllllllllllllllllllllllllllllllll',
+//         'sizes' => [
+//             [
+//                 'id' => '1',
+//                 'name' => 'S',
+//             ],
+//         ],
+//         'price' => '120',
+//     ],
+// ];
 ?>
 
 <x-layout>
@@ -122,7 +122,7 @@ $products = [
                 @foreach ($categories as $category)
                     <div x-data="{ open: false }">
                         <div class ="flex justify-between items-center ml-3 mt-1 p-2 space-x-16" @click="open = !open">
-                            <h1>{{ $category['name'] }}</h1>
+                            <h1>{{ $category->name }}</h1>
                             <i class="fa-solid" x-bind:class="{ 'fa-angle-down': open, 'fa-angle-right': !open }"></i>
                         </div>
 
@@ -132,12 +132,12 @@ $products = [
                             x-transition:leave="transition ease-in duration-300"
                             x-transition:leave-start="opacity-100 transform scale-100"
                             x-transition:leave-end="opacity-0 transform scale-95">
-                            @foreach ($subCategories as $child)
-                                @if ($child['category_id'] === $category['id'])
+                            @foreach ($subcategories as $child)
+                                @if ($child->category_id === $category->id)
                                     <div class="ml-6 mt-1 space-x-2">
-                                        <input type="checkbox" name="subcategories[]" id="{{ $child['id'] }}"
-                                            value="{{ $child['id'] }}">
-                                        <label for="{{ $child['id'] }}">{{ $child['name'] }}</label>
+                                        <input type="checkbox" name="subcategories[]" id="{{ $child->id }}"
+                                            value="{{ $child->id }}">
+                                        <label for="{{ $child->id }}">{{ $child->name }}</label>
                                     </div>
                                 @endif
                             @endforeach
@@ -149,11 +149,15 @@ $products = [
             </form>
         </div>
         <div class="w-full rounded p-2">
-            <div class="flex justify-center items-center flex-wrap space-x-4 space-y-4">
+            <div class="mb-8 flex flex-col gap-4 items-start justify-center sm:flex-row  sm:flex-wrap">
                 @foreach ($products as $product)
                     <x-product-card :product="$product" />
                 @endforeach
             </div>
+            <div class="mt-6">
+                {{ $products->links() }}
+            </div>
         </div>
+
     </div>
 </x-layout>
