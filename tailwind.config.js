@@ -5,7 +5,12 @@ export default {
         "./resources/**/*.blade.php",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                primaryColor: "#F2067E",
+                secondaryColor: "#F867CB",
+            },
+        },
     },
     plugins: [],
 };

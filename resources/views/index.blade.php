@@ -1,3 +1,3 @@
 <x-layout>
-    <h1 class="text-red-800">Hello World</h1>
+    <h1 class="text-primaryColor">Hello World</h1>
 </x-layout>
