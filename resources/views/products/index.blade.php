@@ -110,8 +110,8 @@
 ?>
 
 <x-layout>
-    <div class="flex justify-between items-start space-x-2">
-        <div class="w-auto rounded shadow-md p-2">
+    <div class="flex-col sm:flex-row flex justify-between items-start space-x-2">
+        <div class="w-full sm:w-auto mb-6 rounded shadow-md p-3">
             <form action="/" method="GET">
 
                 <div class="bg-primaryColor bg-opacity-20 flex justify-between items-center p-2 rounded space-x-16">
@@ -151,7 +151,7 @@
             </form>
         </div>
         <div class="w-full rounded p-2">
-            <div class="mb-8 flex flex-col gap-4 items-start justify-center sm:flex-row  sm:flex-wrap">
+            <div class="mb-8 flex flex-col gap-4 items-center sm:items-start justify-center sm:flex-row  sm:flex-wrap">
                 @if (count($products))
                     @foreach ($products as $product)
                         <x-product-card :product="$product" />

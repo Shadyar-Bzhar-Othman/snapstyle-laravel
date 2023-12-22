@@ -19,7 +19,7 @@ class ProductController extends Controller
             ->filterBySubcategories($selectedSubcategories)
             ->latest()->paginate(10)->withQueryString();
 
-        return view('index', [
+        return view('products.index', [
             'products' => $products,
             'categories' => Category::all(),
             'subcategories' => SubCategory::withCount('products')->get(),

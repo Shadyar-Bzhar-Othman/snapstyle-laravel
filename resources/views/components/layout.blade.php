@@ -39,6 +39,20 @@
             <a href="/cart" class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                 Cart
             </a>
+            @auth
+                <form action="/logout" method="POST">
+                    @csrf
+
+                    <x-form.button>Logout</x-form.button>
+                </form>
+            @else
+                <a href="/register" class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    Register
+                </a>
+                <a href="/login" class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    Login
+                </a>
+            @endauth
             <form action="" method="POST">
                 @csrf
 
@@ -53,14 +67,16 @@
         {{ $slot }}
     </main>
 
+    <x-flash />
+
     <footer class="bg-slate-100 px-8 py-4">
-        <div class="flex justify-between items-center">
-            <div>
+        <div class="flex-col sm:flex-row flex justify-between items-center">
+            <div class="text-center sm:text-start">
                 <h1 class="text-2xl font-black mb-2">SnapStyle</h1>
                 <p>Lorem ipsum dolor sit</p>
                 <p>amet consectetur adipisicing elit. Dolores, expedita!</p>
             </div>
-            <ul class="flex items-center space-x-6">
+            <ul class="mt-4 flex items-center space-x-6">
                 <li>
                     <a href="/"
                         class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
@@ -85,7 +101,7 @@
             </ul>
         </div>
         <hr class="my-6">
-        <div class="flex justify-between items-center">
+        <div class="flex-col sm:flex-row flex justify-between items-center">
             <h3><a href="#">Privacy Policy</a></h3>
             <h3><a href="#">@ 2023 ShadyarBzharOthman</a></h3>
             <h3><a href="#">Terms & Conditions</a></h3>
