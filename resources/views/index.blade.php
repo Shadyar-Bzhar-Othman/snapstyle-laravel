@@ -137,7 +137,9 @@
                                     <div class="ml-6 mt-1 space-x-2">
                                         <input type="checkbox" name="subcategories[]" id="{{ $child->id }}"
                                             value="{{ $child->id }}">
-                                        <label for="{{ $child->id }}">{{ $child->name }}</label>
+                                        <label for="{{ $child->id }}">
+                                            {{ $child->name }} ({{ $child->products_count }})
+                                        </label>
                                     </div>
                                 @endif
                             @endforeach
@@ -150,9 +152,13 @@
         </div>
         <div class="w-full rounded p-2">
             <div class="mb-8 flex flex-col gap-4 items-start justify-center sm:flex-row  sm:flex-wrap">
-                @foreach ($products as $product)
-                    <x-product-card :product="$product" />
-                @endforeach
+                @if (count($products))
+                    @foreach ($products as $product)
+                        <x-product-card :product="$product" />
+                    @endforeach
+                @else
+                    <p class="text-xg font-bold text-center">There's no products to display</p>
+                @endif
             </div>
             <div class="mt-6">
                 {{ $products->links() }}

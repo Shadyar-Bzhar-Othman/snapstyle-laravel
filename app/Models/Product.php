@@ -9,17 +9,28 @@ class Product extends Model
 {
     use HasFactory;
 
+    public function scopeFilterBySubcategories($query, $subcategories)
+    {
+        return $query->when($subcategories, function ($query, $subcategories) {
+            $query->whereHas('subcategory', function ($query) use ($subcategories) {
+                $query->whereIn('id', $subcategories);
+            });
+        });
+    }
+
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function subcategories()
+    public function subcategory()
     {
-        return $this->belongsTo(SubCategory::class, "category_id");
+        return $this->belongsTo(SubCategory::class, 'subcategory_id');
     }
 
-    public function productsize()
+
+    public function productsizes()
     {
         return $this->hasMany(ProductSize::class);
     }

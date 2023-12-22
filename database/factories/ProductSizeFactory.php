@@ -19,8 +19,8 @@ class ProductSizeFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => Product::factory()->create(),
-            'size_id' => Size::factory()->create(),
+            'product_id' => '1',
+            'size_id' => $this->faker->numberBetween(1, 5),
             'quantity' => $this->faker->numberBetween(3, 20),
         ];
     }

@@ -63,7 +63,6 @@ class DatabaseSeeder extends Seeder
         ]
         );
 
-
         // For Men
         SubCategory::factory()->create([
             'category_id' => '1',
@@ -116,66 +115,47 @@ class DatabaseSeeder extends Seeder
             'name' => 'Handbags',
         ]);
 
-        Product::factory(2)->create([
-            'category_id' => '1',
-            'subcategory_id' => '2',
-        ]);
-
-        Product::factory(2)->create([
-            'category_id' => '2',
-            'subcategory_id' => '7',
-        ]);
-
+        Product::factory(10)->create();
 
         // Product Size
-        ProductSize::factory()->create([
+        ProductSize::factory(2)->create([
             'product_id' => '1',
-            'size_id' => '1',
         ]);
 
-        ProductSize::factory()->create([
-            'product_id' => '1',
-            'size_id' => '2',
-        ]);
-
-        ProductSize::factory()->create([
+        ProductSize::factory(4)->create([
             'product_id' => '2',
-            'size_id' => '3',
         ]);
 
-        ProductSize::factory()->create([
-            'product_id' => '2',
-            'size_id' => '4',
-        ]);
-
-        ProductSize::factory()->create([
-            'product_id' => '2',
-            'size_id' => '5',
-        ]);
-
-        ProductSize::factory()->create([
-            'product_id' => '2',
-            'size_id' => '1',
-        ]);
-
-        ProductSize::factory()->create([
+        ProductSize::factory(3)->create([
             'product_id' => '3',
-            'size_id' => '1',
         ]);
 
-        ProductSize::factory()->create([
-            'product_id' => '3',
-            'size_id' => '4',
-        ]);
-
-        ProductSize::factory()->create([
+        ProductSize::factory(1)->create([
             'product_id' => '4',
-            'size_id' => '2',
         ]);
 
-        ProductSize::factory()->create([
-            'product_id' => '4',
-            'size_id' => '1',
+        ProductSize::factory(3)->create([
+            'product_id' => '5',
+        ]);
+
+        ProductSize::factory(4)->create([
+            'product_id' => '6',
+        ]);
+
+        ProductSize::factory(3)->create([
+            'product_id' => '7',
+        ]);
+
+        ProductSize::factory(3)->create([
+            'product_id' => '8',
+        ]);
+
+        ProductSize::factory(2)->create([
+            'product_id' => '9',
+        ]);
+
+        ProductSize::factory(5)->create([
+            'product_id' => '10',
         ]);
     }
 }

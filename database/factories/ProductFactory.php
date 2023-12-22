@@ -19,9 +19,12 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $category = $this->faker->numberBetween(1, 2);
+        $subCategory = $category === 1 ? $this->faker->numberBetween(1, 5) : $this->faker->numberBetween(6, 10);
+
         return [
-            'category_id' => Category::factory()->create(),
-            'subcategory_id' => SubCategory::factory()->create(),
+            'category_id' => $category,
+            'subcategory_id' => $subCategory,
             'name' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'price' => $this->faker->numberBetween(3, 300),

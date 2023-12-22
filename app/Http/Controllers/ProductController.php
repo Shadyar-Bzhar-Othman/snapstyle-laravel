@@ -5,15 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view("index", [
-            'products' => Product::latest()->simplePaginate(10)->withQueryString(),
+        $selectedSubcategories = $request->input('subcategories', []);
+
+        // Use the selected filters to fetch products
+        $products = Product::with('category', 'productsizes.size', 'subcategory')
+            ->filterBySubcategories($selectedSubcategories)
+            ->latest()->paginate(10)->withQueryString();
+
+        return view('index', [
+            'products' => $products,
             'categories' => Category::all(),
-            'subcategories' => SubCategory::all(),
+            'subcategories' => SubCategory::withCount('products')->get(),
         ]);
     }
 }
