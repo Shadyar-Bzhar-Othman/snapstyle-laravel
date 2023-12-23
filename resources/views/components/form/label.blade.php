@@ -1,3 +1,3 @@
 @props(['name'])
 
-<label for="name">{{ ucfirst($name) }}</label>
+<label for="{{ $name }}" {{ $attributes->merge(['class' => '']) }}>{{ ucfirst($name) }}</label>

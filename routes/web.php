@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Size;
+use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
@@ -17,6 +20,9 @@ use App\Http\Controllers\OrderController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get("/dashboard/products/create", [ProductController::class, "create"]);
+Route::post("/dashboard/products/create", [ProductController::class, "store"]);
 
 Route::get('/', [ProductController::class, 'index']);
 
