@@ -87,7 +87,10 @@
                     <span class="text-sm">${{ $totalPrice + 12 }}</span>
                 </div>
                 <form action="/order" method="POST" class="self-center">
-                    <input type="hidden" name="totalPrice" value="{{ $totalPrice + 12 }}">
+                    @csrf
+
+                    <input type="hidden" name="items" value="{{ $items }}">
+                    <input type="hidden" name="total_price" value="{{ $totalPrice + 12 }}">
                     <x-form.button class="mt-2">Order</x-form.button>
                 </form>
             </div>

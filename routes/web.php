@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::post('/cart', [CartController::class, 'store']);
 Route::patch('/cart', [CartController::class, 'update']);
 
 Route::delete('/cart', [CartController::class, 'destroy']);
+
+Route::post('/order', [OrderController::class, 'store']);
 
 Route::get('/login', [SessionController::class, 'create'])->middleware('guest');
 Route::post('/login', [SessionController::class, 'store'])->middleware('guest');
