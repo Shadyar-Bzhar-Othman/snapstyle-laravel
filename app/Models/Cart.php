@@ -9,10 +9,13 @@ class Cart extends Model
 {
     use HasFactory;
 
-    public $guarded = [];
-
     public function cartitems()
     {
         return $this->hasMany(CartItem::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

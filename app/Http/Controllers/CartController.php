@@ -10,7 +10,6 @@ use Illuminate\Validation\Rule;
 
 class CartController extends Controller
 {
-
     public function createCart()
     {
         $cart = Cart::where("user_id", auth()->user()->id)->first();
@@ -23,7 +22,8 @@ class CartController extends Controller
 
         return $cart;
     }
-    public function create()
+
+    public function index()
     {
         $cart = $this->createCart();
         $cartItems = CartItem::with('cart', 'product', 'size')->where("cart_id", $cart->id)->get();
@@ -35,7 +35,7 @@ class CartController extends Controller
             });
         }
 
-        return view("cart.create", [
+        return view("cart.index", [
             'items' => $cartItems,
             'totalPrice' => $totalPrice,
         ]);
@@ -70,63 +70,40 @@ class CartController extends Controller
             $cartItem->save();
         }
 
-        session()->flash('success', 'Product added to cart!');
-
-        return redirect('/');
+        return redirect()->route('products.index')->with("success", "Product added to cart!");
     }
 
-    public function update(Request $request)
+    public function update(Request $request, CartItem $cartitem)
     {
-        $cart_id = $request->cart_id;
-        $product_id = $request->product_id;
-        $size_id = $request->size_id;
         $action = $request->action;
 
-        $cartItem = CartItem::where('cart_id', $cart_id)
-            ->where('product_id', $product_id)
-            ->where('size_id', $size_id)
-            ->first();
-
-        if (empty($cartItem)) {
-            return redirect('/cart');
+        if (empty($cartitem)) {
+            return redirect()->route('cart.index')->with("success", "Product can't be updated!");
         }
 
-        if ($action === "sub" && $cartItem->quantity === 1) {
-            $cartItem->delete();
+        if ($action === "sub" && $cartitem->quantity === 1) {
+            $cartitem->delete();
         } else {
             if ($action === "sub") {
-                $cartItem->quantity -= 1;
+                $cartitem->quantity -= 1;
             } else {
-                $cartItem->quantity += 1;
+                $cartitem->quantity += 1;
             }
 
-            $cartItem->save();
+            $cartitem->save();
         }
 
-        session()->flash('success', 'Product successfully updated from cart!');
-
-        return redirect('/cart');
+        return redirect()->route('cart.index')->with("success", "Product successfully updated from cart!");
     }
 
-    public function destroy(Request $request)
+    public function destroy(CartItem $cartitem)
     {
-        $cart_id = $request->cart_id;
-        $product_id = $request->product_id;
-        $size_id = $request->size_id;
-
-        $cartItem = CartItem::where('cart_id', $cart_id)
-            ->where('product_id', $product_id)
-            ->where('size_id', $size_id)
-            ->first();
-
-        if (empty($cartItem)) {
-            return redirect('/cart');
+        if (empty($cartitem)) {
+            return redirect()->route('cart.index')->with("success", "Product can't be removed!");
         }
 
-        $cartItem->delete();
+        $cartitem->delete();
 
-        session()->flash('success', 'Product successfully removed from cart!');
-
-        return redirect('/cart');
+        return redirect()->route('cart.index')->with("success", "Product successfully removed from cart!");
     }
 }

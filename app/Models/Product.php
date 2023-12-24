@@ -9,8 +9,6 @@ class Product extends Model
 {
     use HasFactory;
 
-    public $guarded = [];
-
     public function scopeFilterBySubcategories($query, $subcategories)
     {
         return $query->when($subcategories, function ($query, $subcategories) {

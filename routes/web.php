@@ -1,11 +1,16 @@
 <?php
 
-use App\Models\Category;
-use App\Models\Size;
-use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
+
+// Controllers
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\AdminSubCategoryController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
@@ -21,24 +26,118 @@ use App\Http\Controllers\OrderController;
 |
 */
 
-Route::get("/dashboard/products/create", [ProductController::class, "create"]);
-Route::post("/dashboard/products/create", [ProductController::class, "store"]);
+// index, show, create, store, edit, update, destroy
 
-Route::get('/', [ProductController::class, 'index']);
 
-Route::get('/cart', [CartController::class, 'create']);
-Route::post('/cart', [CartController::class, 'store']);
+// All type of user can access it
+// Website routes - %0 Complete
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
-Route::patch('/cart', [CartController::class, 'update']);
 
-Route::delete('/cart', [CartController::class, 'destroy']);
+// Products - %40 Complete
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
-Route::post('/order', [OrderController::class, 'store']);
 
-Route::get('/login', [SessionController::class, 'create'])->middleware('guest');
-Route::post('/login', [SessionController::class, 'store'])->middleware('guest');
 
-Route::post('/logout', [SessionController::class, 'destroy'])->middleware('auth');
+// Only guest user can access it
+Route::middleware("guest")->group(function () {
+    // Session - %90 Complete
+    Route::get('/login', [SessionController::class, 'create'])->name('login');
+    Route::post('/login', [SessionController::class, 'store'])->name('login');
 
-Route::get('/register', [RegisterController::class, 'create'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+
+    // Register - %90 Complete
+    Route::get('/register', [RegisterController::class, 'create'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register');
+});
+
+
+
+// Only auth user can access it
+Route::middleware("auth")->group(function () {
+    // Cart - %90 Complete
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+    Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+
+    Route::patch('/cart/{cartitem}', [CartController::class, 'update'])->name('cart.update');
+
+    Route::delete('/cart/{cartitem}', [CartController::class, 'destroy'])->name('cart.delete');
+
+
+    // Orders - %30 Complete
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+
+
+    // Session
+    Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
+});
+
+
+
+// Only admin can access it
+Route::middleware("can:admin")->group(function () {
+    // Dashboard - %0 Complete
+    Route::get("/dashboard", [PageController::class, "dashboard"])->name('dashboard');
+
+    // Users Admin - %5 Complete
+    Route::get("/dashboard/users", [AdminUserController::class, "index"])->name('dashboard.users.index');
+
+    Route::get("/dashboard/users/create", [AdminUserController::class, "create"])->name('dashboard.users.create');
+    Route::post("/dashboard/users", [AdminUserController::class, "store"])->name('dashboard.users.store');
+
+    Route::get("/dashboard/users/{user}/edit", [AdminUserController::class, "edit"])->name('dashboard.users.edit');
+    Route::patch("/dashboard/users/{user}", [AdminUserController::class, "update"])->name('dashboard.users.update');
+
+    Route::delete("/dashboard/users/{product}", [AdminUserController::class, "destroy"])->name('dashboard.users.delete');
+
+
+    // Products Admin - %10 Complete
+    Route::get("/dashboard/products", [AdminProductController::class, "index"])->name('dashboard.products.index');
+
+    Route::get("/dashboard/products/create", [AdminProductController::class, "create"])->name('dashboard.products.create');
+    Route::post("/dashboard/products", [AdminProductController::class, "store"])->name('dashboard.products.store');
+
+    Route::get("/dashboard/products/{product}/edit", [AdminProductController::class, "edit"])->name('dashboard.products.edit');
+    Route::patch("/dashboard/products/{product}", [AdminProductController::class, "update"])->name('dashboard.products.update');
+
+    Route::delete("/dashboard/products/{product}", [AdminProductController::class, "destroy"])->name('dashboard.products.delete');
+
+
+    // Categories Admin - %5 Complete
+    Route::get("/dashboard/categories", [AdminCategoryController::class, "index"])->name('dashboard.categories.index');
+
+    Route::get("/dashboard/categories/create", [AdminCategoryController::class, "create"])->name('dashboard.categories.create');
+    Route::post("/dashboard/categories", [AdminCategoryController::class, "store"])->name('dashboard.categories.store');
+
+    Route::get("/dashboard/categories/{category}/edit", [AdminCategoryController::class, "edit"])->name('dashboard.categories.edit');
+    Route::patch("/dashboard/categories/{category}", [AdminCategoryController::class, "update"])->name('dashboard.categories.update');
+
+    Route::delete("/dashboard/categories/{product}", [AdminCategoryController::class, "destroy"])->name('dashboard.categories.delete');
+
+
+    // SubCategories Admin - %5 Complete
+    Route::get("/dashboard/subcategories", [AdminSubCategoryController::class, "index"])->name('dashboard.subcategories.index');
+
+    Route::get("/dashboard/subcategories/create", [AdminSubCategoryController::class, "create"])->name('dashboard.subcategories.create');
+    Route::post("/dashboard/subcategories", [AdminSubCategoryController::class, "store"])->name('dashboard.subcategories.store');
+
+    Route::get("/dashboard/subcategories/{subcategory}/edit", [AdminSubCategoryController::class, "edit"])->name('dashboard.subcategories.edit');
+    Route::patch("/dashboard/subcategories/{subcategory}", [AdminSubCategoryController::class, "update"])->name('dashboard.subcategories.update');
+
+    Route::delete("/dashboard/subcategories/{subcategory}", [AdminSubCategoryController::class, "destroy"])->name('dashboard.subcategories.delete');
+
+    // Orders Admin - %0 Complete
+    Route::get("/dashboard/orders", [AdminOrderController::class, "index"])->name('dashboard.orders.index');
+    Route::get("/dashboard/orders/{order}", [AdminOrderController::class, "show"])->name('dashboard.orders.show');
+
+    Route::patch("/dashboard/orders/{order}", [AdminOrderController::class, "update"])->name('dashboard.orders.update');
+
+    Route::delete("/dashboard/orders/{product}", [AdminOrderController::class, "destroy"])->name('dashboard.orders.delete');
+});

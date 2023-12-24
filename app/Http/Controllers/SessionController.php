@@ -23,17 +23,13 @@ class SessionController extends Controller
             throw ValidationException::withMessages(["email" => "We can't verify your credits"]);
         }
 
-        session()->flash("success", "Welcome Back!");
-
-        return redirect("/");
+        return redirect()->route('home')->with("success", "Welcome Back!");
     }
 
     public function destroy()
     {
         auth()->logout();
 
-        session()->flash("success", "Goodbye!");
-
-        return redirect("/login");
+        return redirect()->route('login')->with("success", "Goodbye!");
     }
 }

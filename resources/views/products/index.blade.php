@@ -1,118 +1,7 @@
-<?php
-// $categories = [
-//     [
-//         'id' => 1,
-//         'name' => 'Man',
-//     ],
-//     [
-//         'id' => 2,
-//         'name' => 'Woman',
-//     ],
-//     [
-//         'id' => 3,
-//         'name' => 'Kids',
-//     ],
-// ];
-
-// $subCategories = [
-//     [
-//         'id' => 1,
-//         'category_id' => 1,
-//         'name' => 'T-Shirt',
-//     ],
-//     [
-//         'id' => 2,
-//         'category_id' => 2,
-//         'name' => 'Shirt',
-//     ],
-//     [
-//         'id' => 1,
-//         'category_id' => 2,
-//         'name' => 'Jeans',
-//     ],
-//     [
-//         'id' => 2,
-//         'category_id' => 1,
-//         'name' => 'Shoes',
-//     ],
-// ];
-
-// $products = [
-//     [
-//         'id' => '1',
-//         'category_id' => '1',
-//         'subcategory_id' => '1',
-//         'name' => 'T-shirt',
-//         'description' => 'lllllllllllllllllllllllllllllllllll',
-//         'sizes' => [
-//             [
-//                 'id' => '1',
-//                 'name' => 'S',
-//             ],
-//             [
-//                 'id' => '3',
-//                 'name' => 'XL',
-//             ],
-//         ],
-//         'price' => '12',
-//     ],
-//     [
-//         'id' => '2',
-//         'category_id' => '2',
-//         'subcategory_id' => '1',
-//         'name' => 'Jeans',
-//         'description' => 'lllllllllllllllllllllllllllllllllll',
-//         'sizes' => [
-//             [
-//                 'id' => '1',
-//                 'name' => 'S',
-//             ],
-//             [
-//                 'id' => '2',
-//                 'name' => 'L',
-//             ],
-//             [
-//                 'id' => '3',
-//                 'name' => 'XL',
-//             ],
-//         ],
-//         'price' => '38',
-//     ],
-//     [
-//         'id' => '3',
-//         'category_id' => '2',
-//         'subcategory_id' => '1',
-//         'name' => 'Jacket',
-//         'description' => 'lllllllllllllllllllllllllllllllllll',
-//         'sizes' => [
-//             [
-//                 'id' => '3',
-//                 'name' => 'XL',
-//             ],
-//         ],
-//         'price' => '14',
-//     ],
-//     [
-//         'id' => '4',
-//         'category_id' => '2',
-//         'subcategory_id' => '3',
-//         'name' => 'Shirt',
-//         'description' => 'lllllllllllllllllllllllllllllllllll',
-//         'sizes' => [
-//             [
-//                 'id' => '1',
-//                 'name' => 'S',
-//             ],
-//         ],
-//         'price' => '120',
-//     ],
-// ];
-?>
-
-<x-layout>
+<x-layouts.main>
     <div class="flex-col sm:flex-row flex justify-between items-start space-x-2">
         <div class="w-full sm:w-auto mb-6 rounded shadow-md p-3">
-            <form action="/" method="GET">
+            <form action="{{ route('products.index') }}" method="GET">
 
                 <div class="bg-primaryColor bg-opacity-20 flex justify-between items-center p-2 rounded space-x-16">
                     <h1>Categories</h1>
@@ -150,20 +39,20 @@
                 <x-form.button class="w-full mt-2">Filter</x-form.button>
             </form>
         </div>
+
         <div class="w-full rounded p-2">
             <div class="mb-8 flex flex-col gap-4 items-center sm:items-start justify-center sm:flex-row  sm:flex-wrap">
                 @if (count($products))
                     @foreach ($products as $product)
-                        <x-product-card :product="$product" />
+                        <x-cards.product :product="$product" />
                     @endforeach
                 @else
-                    <p class="text-xg font-bold text-center">There's no products to display</p>
+                    <p class="text-xg font-bold text-center">No products available at the moment</p>
                 @endif
             </div>
             <div class="mt-6">
                 {{ $products->links() }}
             </div>
         </div>
-
     </div>
-</x-layout>
+</x-layouts.main>

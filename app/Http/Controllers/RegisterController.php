@@ -25,8 +25,6 @@ class RegisterController extends Controller
 
         auth()->login($user);
 
-        session()->flash("success", "Account created successfully!");
-
-        return redirect("/");
+        return redirect()->route('home')->with("success", "Account created successfully!");
     }
 }

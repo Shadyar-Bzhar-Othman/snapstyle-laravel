@@ -9,8 +9,6 @@ class ProductSize extends Model
 {
     use HasFactory;
 
-    public $guarded = [];
-
     public function product()
     {
         return $this->belongsTo(Product::class);

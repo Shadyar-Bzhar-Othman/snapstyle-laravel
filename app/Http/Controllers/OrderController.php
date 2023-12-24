@@ -9,9 +9,23 @@ use App\Models\Cart;
 
 class OrderController extends Controller
 {
+
+    public function index()
+    {
+        // Complete it
+        return view('orders.index', []);
+    }
+
+    public function show(Order $order)
+    {
+        // Complete it
+        return view('orders.show', [
+            'order' => $order,
+        ]);
+    }
+
     public function store(Request $request)
     {
-
         $order = Order::create([
             'user_id' => $request->user()->id,
             'total_price' => $request->total_price,
@@ -32,8 +46,6 @@ class OrderController extends Controller
         $cart = Cart::where('user_id', $request->user()->id)->first();
         $cart->delete();
 
-        session()->flash('success', 'Order placed successfully!');
-
-        return redirect('/');
+        return redirect()->route('home')->with("success", "Order placed successfully!");
     }
 }

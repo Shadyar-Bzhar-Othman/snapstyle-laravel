@@ -17,43 +17,67 @@
 <body>
     <nav class="flex justify-between items-center px-12 py-4">
         <div>
-            <h1 class="text-2xl font-black">SnapStyle</h1>
+            <h1 class="text-2xl font-black"><a href="{{ route('home') }}">SnapStyle</a></h1>
         </div>
         <ul class="flex items-center space-x-5">
             <li>
-                <a href="/"
+                <a href="{{ route('home') }}"
                     class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                     Home
                 </a>
             </li>
             <li>
-                <a href="/products"
+                <a href="{{ route('products.index') }}"
                     class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                     Products
                 </a>
             </li>
+
+            <li>
+                <a href="{{ route('cart.index') }}"
+                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    Cart
+                </a>
             </li>
-            <a href="#" class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                Sale
-            </a>
-            <a href="/cart" class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                Cart
-            </a>
+
+            <li>
+                <a href="{{ route('about') }}"
+                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('contact') }}"
+                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    Contact
+                </a>
+            </li>
             @auth
-                <form action="/logout" method="POST">
+                @admin
+                    <li>
+                        <a href="{{ route('dashboard') }}"
+                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                            Dashboard
+                        </a>
+                    </li>
+                @endadmin
+                <form action="{{ route('logout') }}" method="POST">
                     @csrf
 
                     <x-form.button>Logout</x-form.button>
                 </form>
             @else
-                <a href="/register" class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                <a href="{{ route('register') }}"
+                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                     Register
                 </a>
-                <a href="/login" class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                <a href="{{ route('login') }}"
+                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                     Login
                 </a>
             @endauth
-            <form action="" method="POST">
+            <form action="#" method="POST">
                 @csrf
 
                 <input type="text" name="search" placeholder="Search" value="{{ old('search') }}"
@@ -72,38 +96,50 @@
     <footer class="bg-slate-100 px-8 py-4">
         <div class="flex-col sm:flex-row flex justify-between items-center">
             <div class="text-center sm:text-start">
-                <h1 class="text-2xl font-black mb-2">SnapStyle</h1>
+                <h1 class="text-2xl font-black mb-2"><a href="{{ route('home') }}">SnapStyle</a></h1>
                 <p>Lorem ipsum dolor sit</p>
                 <p>amet consectetur adipisicing elit. Dolores, expedita!</p>
             </div>
             <ul class="mt-4 flex items-center space-x-6">
                 <li>
-                    <a href="/"
+                    <a href="{{ route('home') }}"
                         class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="/products"
+                    <a href="{{ route('products.index') }}"
                         class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                         Products
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ route('cart.index') }}"
+                        class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                        Cart
+                    </a>
                 </li>
-                <a href="#"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                    Sale
-                </a>
-                <a href="/cart"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                    Cart
-                </a>
+
+                <li>
+                    <a href="{{ route('about') }}"
+                        class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('contact') }}"
+                        class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                        Contact
+                    </a>
+                </li>
             </ul>
         </div>
         <hr class="my-6">
         <div class="flex-col sm:flex-row flex justify-between items-center">
             <h3><a href="#">Privacy Policy</a></h3>
-            <h3><a href="#">@ 2023 ShadyarBzharOthman</a></h3>
+            <h3><a href="https://shadyarbzharothman.netlify.app/">@ 2023 ShadyarBzharOthman</a></h3>
             <h3><a href="#">Terms & Conditions</a></h3>
         </div>
     </footer>
