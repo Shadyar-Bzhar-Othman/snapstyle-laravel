@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\State;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
@@ -31,6 +32,24 @@ class DatabaseSeeder extends Seeder
             'email' => "test@gmail.com",
             'password' => "11111111",
         ]);
+
+        // States
+        State::factory()->create([
+            'name' => 'Pending',
+        ]
+        );
+        State::factory()->create([
+            'name' => 'Accepted',
+        ]
+        );
+        State::factory()->create([
+            'name' => 'Finished',
+        ]
+        );
+        State::factory()->create([
+            'name' => 'Rejected',
+        ]
+        );
 
         // Sizes
         Size::factory()->create([

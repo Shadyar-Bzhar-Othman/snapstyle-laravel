@@ -5,82 +5,67 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\SubCategory;
-use App\Models\Size;
-use App\Models\Product;
-use App\Models\ProductSize;
+use Illuminate\Validation\Rule;
 
 class AdminSubCategoryController extends Controller
 {
     public function index()
     {
-        // Complete it
-        return view("dashboard.subcategories.index", []);
+        return view("dashboard.subcategories.index", [
+            'categories' => Category::latest()->get(),
+            'subcategories' => SubCategory::latest()->get(),
+        ]);
     }
 
     public function create()
     {
         return view("dashboard.subcategories.create", [
-            'categories' => Category::all(),
-            'subcategories' => SubCategory::all(),
-            'sizes' => Size::all(),
+            'categories' => Category::latest()->get(),
         ]);
     }
 
     public function store(Request $request)
     {
-        $this->validate($request,
-            [
-                'name' => ["required", "min:2", "max:255"],
-                'description' => ["required", "min:2"],
-                'category' => ["required"],
-                'sizes' => ["required", "array"],
-                'quantities' => ["required", "array"],
-                'price' => ["required", "integer"],
-            ],
-        );
-
-        $subcategory_id = $request->category;
-        $category_id = SubCategory::where("id", $subcategory_id)->first()->category_id;
-
-        $product = Product::create([
-            "category_id" => $category_id,
-            "subcategory_id" => $subcategory_id,
-            "name" => $request->name,
-            "description" => $request->description,
-            "price" => $request->price,
+        $request->validate([
+            'category' => ["required"],
+            'subcategory' => ["required", "min:2", "max:255", Rule::unique("sub_categories", "name")],
         ]);
 
-        $sizes = $request->sizes;
-        $quantities = $request->quantities;
+        SubCategory::create([
+            'category_id' => $request->category,
+            'name' => $request->subcategory,
+        ]);
 
-        foreach ($sizes as $size => $value) {
-            ProductSize::create([
-                "product_id" => $product->id,
-                "size_id" => $value,
-                "quantity" => $quantities[$size],
-            ]);
-        }
-
-        session()->flash('success', 'Product added successfully!');
-
-        return redirect('/');
+        return redirect()->route('dashboard.subcategories.index')->with('success', 'Sub Category added successfully!');
     }
 
     public function edit(SubCategory $subcategory)
     {
-        // Complete it
         return view("dashboard.subcategories.edit", [
+            'categories' => Category::latest()->get(),
             'subcategory' => $subcategory,
         ]);
     }
 
     public function update(Request $request, SubCategory $subcategory)
     {
-        // Complete it
+        $request->validate([
+            'category' => ["required"],
+            'subcategory' => ["required", "min:2", "max:255", Rule::unique("sub_categories", "name")->ignore($subcategory->id)],
+        ]);
+
+        $subcategory->update([
+            'category_id' => $request->category,
+            'name' => $request->subcategory,
+        ]);
+
+        return redirect()->route('dashboard.subcategories.index')->with('success', 'Sub Category updated successfully!');
     }
 
     public function destroy(SubCategory $subcategory)
     {
-        // Complete it
+        $subcategory->delete();
+
+        return redirect()->route('dashboard.subcategories.index')->with('success', 'Sub Category removed successfully!');
     }
 }

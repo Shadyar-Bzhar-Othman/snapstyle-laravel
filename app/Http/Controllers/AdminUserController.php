@@ -4,72 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\SubCategory;
-use App\Models\Size;
-use App\Models\Product;
-use App\Models\ProductSize;
+use Illuminate\Validation\Rule;
 
 class AdminUserController extends Controller
 {
     public function index()
     {
-        // Complete it
-        return view("dashboard.users.index", []);
+        return view("dashboard.users.index", [
+            'users' => User::latest()->get(),
+        ]);
     }
 
     public function create()
     {
-        return view("dashboard.users.create", [
-            'categories' => Category::all(),
-            'subcategories' => SubCategory::all(),
-            'sizes' => Size::all(),
-        ]);
+        return view("dashboard.users.create");
     }
 
     public function store(Request $request)
     {
-        $this->validate($request,
-            [
-                'name' => ["required", "min:2", "max:255"],
-                'description' => ["required", "min:2"],
-                'category' => ["required"],
-                'sizes' => ["required", "array"],
-                'quantities' => ["required", "array"],
-                'price' => ["required", "integer"],
-            ],
-        );
-
-        $subcategory_id = $request->category;
-        $category_id = SubCategory::where("id", $subcategory_id)->first()->category_id;
-
-        $product = Product::create([
-            "category_id" => $category_id,
-            "subcategory_id" => $subcategory_id,
-            "name" => $request->name,
-            "description" => $request->description,
-            "price" => $request->price,
+        $request->validate([
+            'name' => ["required", "min:2", "max:255"],
+            'email' => ["required", "email", Rule::unique("users", "email")],
+            'password' => ["required", "min:8", "max:255"],
+            'role' => ["required"],
         ]);
 
-        $sizes = $request->sizes;
-        $quantities = $request->quantities;
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'role' => $request->role,
+        ]);
 
-        foreach ($sizes as $size => $value) {
-            ProductSize::create([
-                "product_id" => $product->id,
-                "size_id" => $value,
-                "quantity" => $quantities[$size],
-            ]);
-        }
-
-        session()->flash('success', 'Product added successfully!');
-
-        return redirect('/');
+        return redirect()->route('dashboard.users.index')->with('success', 'User added successfully!');
     }
 
     public function edit(User $user)
     {
-        // Complete it
         return view("dashboard.users.edit", [
             'user' => $user,
         ]);
@@ -77,11 +48,27 @@ class AdminUserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        // Complete it
+        $request->validate([
+            'name' => ["required", "min:2", "max:255"],
+            'email' => ["required", "email", Rule::unique("users", "email")],
+            'password' => ["required", "min:8", "max:255"],
+            'role' => ["required"],
+        ]);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'role' => $request->role,
+        ]);
+
+        return redirect()->route('dashboard.users.index')->with('success', 'User updated successfully!');
     }
 
     public function destroy(User $user)
     {
-        // Complete it
+        $user->delete();
+
+        return redirect()->route('dashboard.users.index')->with('success', 'User removed successfully!');
     }
 }

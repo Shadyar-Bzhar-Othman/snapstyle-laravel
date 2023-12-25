@@ -28,7 +28,7 @@
         <div class="bg-slate-300 p-2 rounded w-full">
             <x-form.label name="quantities" class="font-bold" />
             <div id="size-container">
-                {{-- Inputed added dynamicly --}}
+                {{-- Input added dynamicly --}}
             </div>
             <x-form.error name='quantities' />
         </div>
@@ -38,4 +38,37 @@
 
         <x-form.button class="self-center mt-2">Add Product</x-form.button>
     </x-form.form>
+    <script>
+        function validateInput(input) {
+            const minValue = 1;
+
+            // Check if the input value is not a number or is less than the minimum value
+            if (isNaN(input.value) || input.value < minValue) {
+                // Set the input value to the minimum value
+                input.value = minValue;
+            }
+        }
+
+        function addSizeEntry(name) {
+            // Check if an input with the specified name already exists
+            const existingDiv = document.getElementById(`number${name}`);
+
+            console.log(existingDiv);
+
+            // If it exists, remove it
+            if (existingDiv) {
+                existingDiv.parentNode.removeChild(existingDiv);
+
+                return;
+            }
+
+            // Add the new input
+            const sizeContainer = document.querySelector("#size-container");
+            const sizeEntryHTML = `
+    <x-form.special-input name="${name}" field="quantities" />
+`;
+
+            sizeContainer.innerHTML += sizeEntryHTML;
+        }
+    </script>
 </x-layouts.dashboard>

@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminProductSizeController;
+use App\Http\Controllers\AdminSizeController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminSubCategoryController;
@@ -95,7 +97,7 @@ Route::middleware("can:admin")->group(function () {
     Route::get("/dashboard/users/{user}/edit", [AdminUserController::class, "edit"])->name('dashboard.users.edit');
     Route::patch("/dashboard/users/{user}", [AdminUserController::class, "update"])->name('dashboard.users.update');
 
-    Route::delete("/dashboard/users/{product}", [AdminUserController::class, "destroy"])->name('dashboard.users.delete');
+    Route::delete("/dashboard/users/{user}", [AdminUserController::class, "destroy"])->name('dashboard.users.delete');
 
 
     // Products Admin - %10 Complete
@@ -110,6 +112,28 @@ Route::middleware("can:admin")->group(function () {
     Route::delete("/dashboard/products/{product}", [AdminProductController::class, "destroy"])->name('dashboard.products.delete');
 
 
+    // Product Sizes Admin - %10 Complete
+    Route::get("/dashboard/productsizes/create/{product}", [AdminProductSizeController::class, "create"])->name('dashboard.productsizes.create');
+    Route::post("/dashboard/productsizes/", [AdminProductSizeController::class, "store"])->name('dashboard.productsizes.store');
+
+    Route::get("/dashboard/productsizes/{productsize}/edit", [AdminProductSizeController::class, "edit"])->name('dashboard.productsizes.edit');
+    Route::patch("/dashboard/productsizes/{productsize}", [AdminProductSizeController::class, "update"])->name('dashboard.productsizes.update');
+
+    Route::delete("/dashboard/productsizes/{productsize}", [AdminProductSizeController::class, "destroy"])->name('dashboard.productsizes.delete');
+
+
+    // Sizes Admin - %10 Complete
+    Route::get("/dashboard/sizes", [AdminSizeController::class, "index"])->name('dashboard.sizes.index');
+
+    Route::get("/dashboard/sizes/create", [AdminSizeController::class, "create"])->name('dashboard.sizes.create');
+    Route::post("/dashboard/sizes", [AdminSizeController::class, "store"])->name('dashboard.sizes.store');
+
+    Route::get("/dashboard/sizes/{size}/edit", [AdminSizeController::class, "edit"])->name('dashboard.sizes.edit');
+    Route::patch("/dashboard/sizes/{size}", [AdminSizeController::class, "update"])->name('dashboard.sizes.update');
+
+    Route::delete("/dashboard/sizes/{size}", [AdminSizeController::class, "destroy"])->name('dashboard.sizes.delete');
+
+
     // Categories Admin - %5 Complete
     Route::get("/dashboard/categories", [AdminCategoryController::class, "index"])->name('dashboard.categories.index');
 
@@ -119,7 +143,7 @@ Route::middleware("can:admin")->group(function () {
     Route::get("/dashboard/categories/{category}/edit", [AdminCategoryController::class, "edit"])->name('dashboard.categories.edit');
     Route::patch("/dashboard/categories/{category}", [AdminCategoryController::class, "update"])->name('dashboard.categories.update');
 
-    Route::delete("/dashboard/categories/{product}", [AdminCategoryController::class, "destroy"])->name('dashboard.categories.delete');
+    Route::delete("/dashboard/categories/{category}", [AdminCategoryController::class, "destroy"])->name('dashboard.categories.delete');
 
 
     // SubCategories Admin - %5 Complete
@@ -138,6 +162,4 @@ Route::middleware("can:admin")->group(function () {
     Route::get("/dashboard/orders/{order}", [AdminOrderController::class, "show"])->name('dashboard.orders.show');
 
     Route::patch("/dashboard/orders/{order}", [AdminOrderController::class, "update"])->name('dashboard.orders.update');
-
-    Route::delete("/dashboard/orders/{product}", [AdminOrderController::class, "destroy"])->name('dashboard.orders.delete');
 });

@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $selectedSubcategories = $request->input('subcategories', []);
+        $selectedSubcategories = request()->input('subcategories', []);
 
         $products = Product::with('category', 'productsizes.size', 'subcategory')
             ->filterBySubcategories($selectedSubcategories)

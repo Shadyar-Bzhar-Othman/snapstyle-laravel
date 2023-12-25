@@ -13,16 +13,17 @@ class AdminProductController extends Controller
 {
     public function index()
     {
-        // Complete it
-        return view("dashboard.products.index", []);
+        return view("dashboard.products.index", [
+            'products' => Product::with("category", "subcategory")->latest()->get(),
+        ]);
     }
 
     public function create()
     {
         return view("dashboard.products.create", [
-            'categories' => Category::all(),
-            'subcategories' => SubCategory::all(),
-            'sizes' => Size::all(),
+            'categories' => Category::latest()->get(),
+            'subcategories' => SubCategory::latest()->get(),
+            'sizes' => Size::latest()->get(),
         ]);
     }
 
@@ -61,26 +62,48 @@ class AdminProductController extends Controller
             ]);
         }
 
-        session()->flash('success', 'Product added successfully!');
-
-        return redirect('/');
+        return redirect()->route('dashboard.products.index')->with('success', 'Product added successfully!');
     }
 
     public function edit(Product $product)
     {
-        // Complete it
         return view("dashboard.products.edit", [
             'product' => $product,
+            'productsizes' => ProductSize::with(["product", "size"])->where("product_id", $product->id)->latest()->get(),
+            'categories' => Category::latest()->get(),
+            'subcategories' => SubCategory::latest()->get(),
         ]);
     }
 
     public function update(Request $request, Product $product)
     {
-        // Complete it
+        $this->validate($request,
+            [
+                'name' => ["required", "min:2", "max:255"],
+                'description' => ["required", "min:2"],
+                'category' => ["required"],
+                'price' => ["required", "integer"],
+            ],
+        );
+
+        $subcategory_id = $request->category;
+        $category_id = SubCategory::where("id", $subcategory_id)->first()->category_id;
+
+        $product->update([
+            "category_id" => $category_id,
+            "subcategory_id" => $subcategory_id,
+            "name" => $request->name,
+            "description" => $request->description,
+            "price" => $request->price,
+        ]);
+
+        return redirect()->route('dashboard.products.index')->with('success', 'Product updated successfully!');
     }
 
     public function destroy(Product $product)
     {
-        // Complete it
+        $product->delete();
+
+        return redirect()->route('dashboard.products.index')->with('success', 'Product removed successfully!');
     }
 }

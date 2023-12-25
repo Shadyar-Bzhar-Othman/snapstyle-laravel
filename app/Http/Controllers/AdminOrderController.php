@@ -4,31 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\State;
 use Illuminate\Http\Request;
 
 class AdminOrderController extends Controller
 {
     public function index()
     {
-        // Complete it
-        return view("dashboard.orders.index", []);
+        $state = request()->input("state");
+
+        return view("dashboard.orders.index", [
+            'orders' => Order::with(["user", "state"])->filter($state)->latest()->paginate(1)->withQueryString(),
+            'states' => State::latest()->get(),
+        ]);
     }
 
     public function show(Order $order)
     {
-        // Complete it
         return view("dashboard.orders.show", [
             'order' => $order,
+            'orderitems' => OrderItem::with(["product", "size"])->where("order_id", $order->id)->latest()->get(),
+            'states' => State::latest()->get(),
         ]);
     }
 
     public function update(Request $request, Order $order)
     {
-        // Complete it
-    }
+        $order->update([
+            'state_id' => $request->state,
+        ]);
 
-    public function destroy(Order $order)
-    {
-        // Complete it
+        return redirect()->route('dashboard.orders.index')->with('success', 'Order updated successfully!');
     }
 }

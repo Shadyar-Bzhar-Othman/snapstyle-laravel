@@ -1,5 +1,5 @@
 <x-layouts.dashboard>
-    <x-structure heading="category" model="categories">
+    <x-structure heading="size" model="sizes">
         <thead class="bg-gray-50 border-b-2 border-gray-200">
             <tr>
                 <th class="w-20 p-3 text-sm font-semibold tracking-wide text-center">Name</th>
@@ -9,22 +9,21 @@
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
-            @foreach ($categories as $category)
+            @foreach ($sizes as $size)
                 <tr class="bg-white">
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">
-                        {{ $category->name }}
+                        {{ $size->name }}
                     </td>
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">
-                        {{ $category->created_at->format('Y-m-d H:i:s') }}</td>
+                        {{ $size->created_at->format('Y-m-d H:i:s') }}</td>
                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">
-                        {{ $category->updated_at->format('Y-m-d H:i:s') }}</td>
+                        {{ $size->updated_at->format('Y-m-d H:i:s') }}</td>
                     <td
                         class="flex justify-center items-center space-x-2 p-3 text-sm text-gray-700 whitespace-nowrap text-center">
-                        <a href="{{ route('dashboard.categories.edit', ['category' => $category]) }}"><i
+                        <a href="{{ route('dashboard.sizes.edit', ['size' => $size]) }}"><i
                                 class="fa-solid fa-pen-to-square fa-lg"></i></a>
 
-                        <form action="{{ route('dashboard.categories.delete', ['category' => $category]) }}"
-                            method="POST">
+                        <form action="{{ route('dashboard.sizes.delete', ['size' => $size]) }}" method="POST">
                             @csrf
                             @method('DELETE')
 

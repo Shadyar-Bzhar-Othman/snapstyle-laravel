@@ -1,5 +1,5 @@
 <x-layouts.dashboard>
-    <x-form.form heading="Add Sub Category" action="{{ route('dashboard.subcategories.create') }}" method="POST">
+    <x-form.form heading="Add Sub Category" action="{{ route('dashboard.subcategories.store') }}" method="POST">
         <x-form.input name="subcategory" />
         <x-form.field>
             <x-form.label name="category" />

@@ -8,67 +8,37 @@ use App\Models\SubCategory;
 use App\Models\Size;
 use App\Models\Product;
 use App\Models\ProductSize;
+use Illuminate\Validation\Rule;
 
 class AdminCategoryController extends Controller
 {
     public function index()
     {
-        // Complete it
-        return view("dashboard.categories.index", []);
+        return view("dashboard.categories.index", [
+            'categories' => Category::latest()->get(),
+        ]);
     }
 
     public function create()
     {
-        return view("dashboard.categories.create", [
-            'categories' => Category::all(),
-            'subcategories' => SubCategory::all(),
-            'sizes' => Size::all(),
-        ]);
+        return view("dashboard.categories.create");
     }
 
     public function store(Request $request)
     {
-        $this->validate($request,
-            [
-                'name' => ["required", "min:2", "max:255"],
-                'description' => ["required", "min:2"],
-                'category' => ["required"],
-                'sizes' => ["required", "array"],
-                'quantities' => ["required", "array"],
-                'price' => ["required", "integer"],
-            ],
-        );
-
-        $subcategory_id = $request->category;
-        $category_id = SubCategory::where("id", $subcategory_id)->first()->category_id;
-
-        $product = Product::create([
-            "category_id" => $category_id,
-            "subcategory_id" => $subcategory_id,
-            "name" => $request->name,
-            "description" => $request->description,
-            "price" => $request->price,
+        $request->validate([
+            'category' => ["required", "min:2", "max:255", Rule::unique("categories", "name")],
         ]);
 
-        $sizes = $request->sizes;
-        $quantities = $request->quantities;
+        Category::create([
+            'name' => $request->category,
+        ]);
 
-        foreach ($sizes as $size => $value) {
-            ProductSize::create([
-                "product_id" => $product->id,
-                "size_id" => $value,
-                "quantity" => $quantities[$size],
-            ]);
-        }
-
-        session()->flash('success', 'Product added successfully!');
-
-        return redirect('/');
+        return redirect()->route('dashboard.categories.index')->with('success', 'Category added successfully!');
     }
 
     public function edit(Category $category)
     {
-        // Complete it
         return view("dashboard.categories.edit", [
             'category' => $category,
         ]);
@@ -76,11 +46,21 @@ class AdminCategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        // Complete it
+        $request->validate([
+            'category' => ["required", "min:2", "max:255", Rule::unique("categories", "name")->ignore($category->id)],
+        ]);
+
+        $category->update([
+            'name' => $request->category,
+        ]);
+
+        return redirect()->route('dashboard.categories.index')->with('success', 'Category updated successfully!');
     }
 
     public function destroy(Category $category)
     {
-        // Complete it
+        $category->delete();
+
+        return redirect()->route('dashboard.categories.index')->with('success', 'Category removed successfully!');
     }
 }
