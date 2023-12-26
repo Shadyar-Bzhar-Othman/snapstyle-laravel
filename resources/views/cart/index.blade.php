@@ -29,8 +29,6 @@
                                 </td>
                                 <td class="text-center px-6 py-4">
                                     <div class="flex flex-col items-center justify-center space-y-2">
-
-
                                         <div
                                             class="flex justify-center items-center space-x-2 border border-primaryColor p-1 rounded">
                                             <form action="{{ route('cart.update', ['cartitem' => $item]) }}"

@@ -4,7 +4,7 @@
         <div>
             <div class="flex justify-start items-center space-x-2 mb-2">
                 <h5 class="mb-2 text-base font-bold">Order Number: </h5>
-                <h1 class="mb-2 text-sm font-bold text-slate-400">Order ({{ $order->id }})</h1>
+                <h1 class="mb-2 text-sm font-bold text-slate-400">{{ $order->id }}</h1>
             </div>
             <div class="flex justify-start items-center space-x-2 mb-2">
                 <h5 class="mb-2 text-base font-bold">Order State: </h5>

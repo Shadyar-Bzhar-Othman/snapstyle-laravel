@@ -6,6 +6,7 @@ use App\Models\ProductSize;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\State;
 use App\Models\Cart;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -15,15 +16,20 @@ class OrderController extends Controller
 
     public function index()
     {
-        // Complete it
-        return view('orders.index', []);
+        $state = request()->input("state");
+
+        return view("orders.index", [
+            'orders' => Order::with(["user", "state"])->where("user_id", auth()->user()->id)->filter($state)->latest()->paginate(10)->withQueryString(),
+            'states' => State::latest()->get(),
+        ]);
     }
 
     public function show(Order $order)
     {
-        // Complete it
-        return view('orders.show', [
+        return view("orders.show", [
             'order' => $order,
+            'orderitems' => OrderItem::with(["product", "size"])->where("order_id", $order->id)->latest()->get(),
+            'states' => State::latest()->get(),
         ]);
     }
 

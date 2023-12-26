@@ -114,11 +114,16 @@
                     Products
                 </a>
             </li>
-
             <li>
                 <a href="{{ route('cart.index') }}"
                     class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                     Cart
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('orders.index') }}"
+                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    Orders
                 </a>
             </li>
             @auth
@@ -171,11 +176,16 @@
                             Products
                         </a>
                     </li>
-
                     <li>
                         <a href="{{ route('cart.index') }}"
                             class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                             Cart
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('orders.index') }}"
+                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                            Orders
                         </a>
                     </li>
                     @auth
