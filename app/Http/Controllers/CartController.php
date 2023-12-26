@@ -37,6 +37,7 @@ class CartController extends Controller
 
         return view("cart.index", [
             'items' => $cartItems,
+            'shippingPrice' => '5',
             'totalPrice' => $totalPrice,
         ]);
     }

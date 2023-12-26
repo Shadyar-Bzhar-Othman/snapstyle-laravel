@@ -34,8 +34,6 @@ use App\Http\Controllers\OrderController;
 // All type of user can access it
 // Website routes - %0 Complete
 Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/about', [PageController::class, 'about'])->name('about');
-Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
 
 // Products - %40 Complete

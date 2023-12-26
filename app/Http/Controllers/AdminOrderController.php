@@ -14,7 +14,7 @@ class AdminOrderController extends Controller
         $state = request()->input("state");
 
         return view("dashboard.orders.index", [
-            'orders' => Order::with(["user", "state"])->filter($state)->latest()->paginate(1)->withQueryString(),
+            'orders' => Order::with(["user", "state"])->filter($state)->latest()->paginate(10)->withQueryString(),
             'states' => State::latest()->get(),
         ]);
     }
