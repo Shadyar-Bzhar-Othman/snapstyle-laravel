@@ -1,3 +1,5 @@
+@props(['pd' => 'true'])
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,85 +10,13 @@
     <title>SnapStyle</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3a78b9f26f.js" crossorigin="anonymous" defer></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
 </head>
 
 <body>
-    {{-- <nav class="flex justify-between items-center px-12 py-4">
-        <div>
-            <h1 class="text-2xl font-black"><a href="{{ route('home') }}">SnapStyle</a></h1>
-        </div>
-        <ul class="flex items-center space-x-5">
-            <li>
-                <a href="{{ route('home') }}"
-                    class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('products.index') }}"
-                    class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                    Products
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('cart.index') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                    Cart
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('about') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                    About
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('contact') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                    Contact
-                </a>
-            </li>
-            @auth
-                @admin
-                    <li>
-                        <a href="{{ route('dashboard') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                            Dashboard
-                        </a>
-                    </li>
-                @endadmin
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-
-                    <x-form.button>Logout</x-form.button>
-                </form>
-            @else
-                <a href="{{ route('register') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                    Register
-                </a>
-                <a href="{{ route('login') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
-                    Login
-                </a>
-            @endauth
-            <form action="#" method="POST">
-                @csrf
-
-                <input type="text" name="search" placeholder="Search" value="{{ old('search') }}"
-                    class="px-3 py-1 border border-slate-300 outline-none rounded ">
-                <x-form.button>Search</x-form.button>
-            </form>
-        </ul>
-    </nav> --}}
-
     <nav x-data="{ open: false }" class="flex justify-between items-center px-12 py-4">
         <div>
             <h1 class="text-2xl font-black"><a href="{{ route('home') }}">SnapStyle</a></h1>
@@ -104,25 +34,29 @@
         <ul class="hidden sm:flex items-center space-x-5">
             <li>
                 <a href="{{ route('home') }}"
-                    class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    @if (request()->routeIs('home')) border-b border-primaryColor @endif">
                     Home
                 </a>
             </li>
             <li>
                 <a href="{{ route('products.index') }}"
-                    class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    @if (request()->routeIs('products.index')) border-b border-primaryColor @endif">
                     Products
                 </a>
             </li>
             <li>
                 <a href="{{ route('cart.index') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    @if (request()->routeIs('cart.index')) border-b border-primaryColor @endif">
                     Cart
                 </a>
             </li>
             <li>
                 <a href="{{ route('orders.index') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    @if (request()->routeIs('orders.index')) border-b border-primaryColor @endif">
                     Orders
                 </a>
             </li>
@@ -130,7 +64,8 @@
                 @admin
                     <li>
                         <a href="{{ route('dashboard') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            @if (request()->routeIs('dashboard')) border-b border-primaryColor @endif">
                             Dashboard
                         </a>
                     </li>
@@ -142,11 +77,13 @@
                 </form>
             @else
                 <a href="{{ route('register') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    @if (request()->routeIs('register')) border-b border-primaryColor @endif">
                     Register
                 </a>
                 <a href="{{ route('login') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    @if (request()->routeIs('login')) border-b border-primaryColor @endif">
                     Login
                 </a>
             @endauth
@@ -166,25 +103,29 @@
                     </button>
                     <li>
                         <a href="{{ route('home') }}"
-                            class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                            class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            @if (request()->routeIs('home')) border-b border-primaryColor @endif">
                             Home
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('products.index') }}"
-                            class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                            class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            @if (request()->routeIs('products.index')) border-b border-primaryColor @endif">
                             Products
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('cart.index') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            @if (request()->routeIs('cart.index')) border-b border-primaryColor @endif">
                             Cart
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('orders.index') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            @if (request()->routeIs('orders.index')) border-b border-primaryColor @endif">
                             Orders
                         </a>
                     </li>
@@ -192,7 +133,8 @@
                         @admin
                             <li>
                                 <a href="{{ route('dashboard') }}"
-                                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                                    @if (request()->routeIs('dashboard')) border-b border-primaryColor @endif">
                                     Dashboard
                                 </a>
                             </li>
@@ -204,11 +146,13 @@
                         </form>
                     @else
                         <a href="{{ route('register') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            @if (request()->routeIs('register')) border-b border-primaryColor @endif">
                             Register
                         </a>
                         <a href="{{ route('login') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            @if (request()->routeIs('login')) border-b border-primaryColor @endif">
                             Login
                         </a>
                     @endauth
@@ -217,7 +161,7 @@
         </div>
     </nav>
 
-    <main class="px-12 py-6">
+    <main class="@if ($pd == 'true') px-12 @endif py-6">
         {{ $slot }}
     </main>
 
