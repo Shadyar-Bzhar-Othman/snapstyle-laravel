@@ -1,66 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SnapStyle (E-commerce Website)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+SnapStyle Website is a Laravel-based project that utilizes Tailwind CSS for styling, Blade for templating, Alpine.js for interactive components, and MySQL for the database. It enables users to browse products, add items to their cart, place orders, search for products, manage their accounts, and more. The admin dashboard provides tools for order management, product CRUD operations, and user management
 
-## About Laravel
+## Table of Contents
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   [Screenshots](#screenshots)
+-   [Installation](#installation)
+-   [Features](#features)
+-   [Technologies Used](#technologies-used)
+-   [Conclusion](#conclusion)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Screenshots
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| ![](public/images/readme/1.PNG) | ![](public/images/readme/2.PNG) |
+| :-----------------------------: | :-----------------------------: |
+| ![](public/images/readme/3.PNG) | ![](public/images/readme/4.PNG) |
 
-## Learning Laravel
+| ![](public/images/readme/5.PNG) | ![](public/images/readme/6.PNG) |
+| :-----------------------------: | :-----------------------------: |
+| ![](public/images/readme/7.PNG) | ![](public/images/readme/8.PNG) |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| ![](public/images/readme/9.PNG) | ![](public/images/readme/10.PNG) |
+| :-----------------------------: | :------------------------------: |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   [Watch the video](https://drive.google.com/file/d/1nQQeSL5EpP6vtOGYtK3PjKGtoxyDL1tT/view?usp=sharing)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+To run the website locally, follow these steps:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+**Step 1:**
 
-### Premium Partners
+Download or clone this repo by using the link below:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```
+https://github.com/Shadyar-Bzhar-Othman/SnapStyle.git
+```
 
-## Contributing
+**Step 2:**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Go to project root and execute the following command in console to get the required dependencies:
 
-## Code of Conduct
+```
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Step 3:**
 
-## Security Vulnerabilities
+```
+php artisan migrate --seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Step 4:**
 
-## License
+Run the website:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+php artisan serve
+```
+
+## Features
+
+-   View products
+-   Add products to the cart
+-   Place orders
+-   Search for products
+-   User account creation and management
+-   Admin dashboard with order management
+-   CRUD operations for product categories, subcategories, and sizes
+
+## Technologies Used
+
+-   Laravel (Backend)
+-   Tailwind CSS (Styling)
+-   MySQL (Database)
+-   Blade (Templating)
+-   Alpine.js (Frontend Interactivity)
+
+## Conclusion
+
+I will be happy to answer any questions that you may have on this project, and if you want to lend a hand with the SnapStyle Website project then please feel free to submit an issue and/or pull request 😁
+
+If you liked my work, don’t forget to ⭐ star the repo to show your support.
