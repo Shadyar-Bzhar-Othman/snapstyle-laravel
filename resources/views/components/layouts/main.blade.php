@@ -19,10 +19,9 @@
 <body>
     <nav x-data="{ open: false }" class="flex justify-between items-center px-12 py-4">
         <div>
-            <h1 class="text-2xl font-black"><a href="{{ route('home') }}">SnapStyle</a></h1>
+            <h1 class="text-2xl font-bold"><a href="{{ route('home') }}">SnapStyle</a></h1>
         </div>
 
-        <!-- Button for small screens -->
         <button @click="open = !open" class="sm:hidden text-2xl text-primaryColor focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
@@ -30,32 +29,31 @@
             </svg>
         </button>
 
-        <!-- Navigation items for large screens -->
         <ul class="hidden sm:flex items-center space-x-5">
             <li>
                 <a href="{{ route('home') }}"
-                    class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    class="text-base text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                     @if (request()->routeIs('home')) border-b border-primaryColor @endif">
                     Home
                 </a>
             </li>
             <li>
                 <a href="{{ route('products.index') }}"
-                    class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    class="text-base text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                     @if (request()->routeIs('products.index')) border-b border-primaryColor @endif">
                     Products
                 </a>
             </li>
             <li>
                 <a href="{{ route('cart.index') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                     @if (request()->routeIs('cart.index')) border-b border-primaryColor @endif">
                     Cart
                 </a>
             </li>
             <li>
                 <a href="{{ route('orders.index') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                     @if (request()->routeIs('orders.index')) border-b border-primaryColor @endif">
                     Orders
                 </a>
@@ -64,7 +62,7 @@
                 @admin
                     <li>
                         <a href="{{ route('dashboard') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                             @if (request()->routeIs('dashboard')) border-b border-primaryColor @endif">
                             Dashboard
                         </a>
@@ -77,12 +75,12 @@
                 </form>
             @else
                 <a href="{{ route('register') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                     @if (request()->routeIs('register')) border-b border-primaryColor @endif">
                     Register
                 </a>
                 <a href="{{ route('login') }}"
-                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                    class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                     @if (request()->routeIs('login')) border-b border-primaryColor @endif">
                     Login
                 </a>
@@ -90,10 +88,11 @@
         </ul>
 
         <div x-show="open" @click="open = false"
-            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div class="bg-white p-4 m-4 rounded shadow-md w-64">
+            class="fixed inset-0 bg-blackColor bg-opacity-50 flex items-center justify-center">
+            <div class="bg-whiteColor p-4 m-4 rounded shadow-md w-64">
                 <ul class="flex flex-col space-y-2 relative">
-                    <button @click="open = false" class="absolute top-2 right-2 text-gray-700 hover:text-primaryColor">
+                    <button @click="open = false"
+                        class="absolute top-2 right-2 text-darkgreyColor hover:text-primaryColor">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -103,28 +102,28 @@
                     </button>
                     <li>
                         <a href="{{ route('home') }}"
-                            class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            class="text-base text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                             @if (request()->routeIs('home')) border-b border-primaryColor @endif">
                             Home
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('products.index') }}"
-                            class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            class="text-base text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                             @if (request()->routeIs('products.index')) border-b border-primaryColor @endif">
                             Products
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('cart.index') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                             @if (request()->routeIs('cart.index')) border-b border-primaryColor @endif">
                             Cart
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('orders.index') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                             @if (request()->routeIs('orders.index')) border-b border-primaryColor @endif">
                             Orders
                         </a>
@@ -133,25 +132,25 @@
                         @admin
                             <li>
                                 <a href="{{ route('dashboard') }}"
-                                    class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                                    class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                                     @if (request()->routeIs('dashboard')) border-b border-primaryColor @endif">
                                     Dashboard
                                 </a>
                             </li>
                         @endadmin
-                        <form action="{{ route('logout') }}" method="POST">
+                        <form action="{{ route('logout') }}" method="POST" class="mt-2">
                             @csrf
 
                             <x-form.button>Logout</x-form.button>
                         </form>
                     @else
                         <a href="{{ route('register') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                             @if (request()->routeIs('register')) border-b border-primaryColor @endif">
                             Register
                         </a>
                         <a href="{{ route('login') }}"
-                            class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
+                            class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor
                             @if (request()->routeIs('login')) border-b border-primaryColor @endif">
                             Login
                         </a>
@@ -167,30 +166,30 @@
 
     <x-flash />
 
-    <footer class="bg-slate-100 px-8 py-4">
+    <footer class="bg-greyColor px-8 py-4">
         <div class="flex-col sm:flex-row flex justify-between items-center">
             <div class="text-center sm:text-start">
-                <h1 class="text-2xl font-black mb-2"><a href="{{ route('home') }}">SnapStyle</a></h1>
-                <p>Lorem ipsum dolor sit</p>
-                <p>amet consectetur adipisicing elit. Dolores, expedita!</p>
+                <h1 class="text-2xl font-black mb-2 text-primaryColor"><a href="{{ route('home') }}">SnapStyle</a></h1>
+                <p>Discover Your Distinctive Look</p>
+                <p>Fashioned with Precision, Worn with Confidence</p>
             </div>
             <ul class="mt-4 flex flex-wrap justify-center items-center space-x-6">
                 <li>
                     <a href="{{ route('home') }}"
-                        class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                        class="text-base text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                         Home
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('products.index') }}"
-                        class="text-base text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                        class="text-base text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                         Products
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('cart.index') }}"
-                        class="text-black pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
+                        class="text-blackColor pb-1 transition-all duration-500 ease-in-out hover:text-primaryColor">
                         Cart
                     </a>
                 </li>
@@ -199,7 +198,8 @@
         <hr class="my-6">
         <div class="flex-col sm:flex-row flex justify-between items-center">
             <h3><a href="#">Privacy Policy</a></h3>
-            <h3><a href="https://shadyarbzharothman.netlify.app/">@ 2023 ShadyarBzharOthman</a></h3>
+            <h3><a href="https://shadyarbzharothman.netlify.app/" class="text-primaryColor">@ 2023
+                    ShadyarBzharOthman</a></h3>
             <h3><a href="#">Terms & Conditions</a></h3>
         </div>
     </footer>

@@ -7,8 +7,12 @@ export default {
     theme: {
         extend: {
             colors: {
-                primaryColor: "#F2067E",
-                secondaryColor: "#F867CB",
+                primaryColor: "#F83758",
+                secondaryColor: "#FA7189",
+                greyColor: "#F5F6FA",
+                darkgreyColor: "#8F959E",
+                whiteColor: "#FEFEFE",
+                blackColor: "#1D1E20",
             },
         },
     },

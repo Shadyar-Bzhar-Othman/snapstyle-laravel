@@ -1,9 +1,8 @@
 <x-layouts.main>
     <div class="flex flex-col justify-start items-center">
-        <h1 class="text-center mb-2">Orders</h1>
+        <h1 class="text-2xl font-bold text-primaryColor mb-2">Orders</h1>
         <form id="filterForm" action="{{ route('orders.index') }}" method="GET">
             <x-form.field>
-                <x-form.label name="filter" />
                 <select name="state" id="filter"
                     class="px-4 py-2 outline-none text-sm border border-gray-400 w-full rounded-xl"
                     onchange="submitForm()">

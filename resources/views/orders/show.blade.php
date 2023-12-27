@@ -1,22 +1,22 @@
 <x-layouts.main>
-    <p class="text-center">Order Datails</p>
+    <h1 class="text-center text-2xl font-bold text-primaryColor">Order Datails</h1>
     <div class="flex justify-center items-center p-10">
         <div>
             <div class="flex justify-start items-center space-x-2 mb-2">
-                <h5 class="mb-2 text-base font-bold">Order Number: </h5>
-                <h1 class="mb-2 text-sm font-bold text-slate-400">{{ $order->id }}</h1>
+                <h5 class="mb-2 text-sm font-bold">Order Number: </h5>
+                <h1 class="mb-2 text-xs font-bold text-darkgreyColor">{{ $order->id }}</h1>
             </div>
             <div class="flex justify-start items-center space-x-2 mb-2">
-                <h5 class="mb-2 text-base font-bold">Order State: </h5>
-                <h1 class="mb-2 text-sm font-bold text-slate-400">{{ $order->state->name }}</h1>
+                <h5 class="mb-2 text-sm font-bold">Order State: </h5>
+                <h1 class="mb-2 text-xs font-bold text-darkgreyColor">{{ $order->state->name }}</h1>
             </div>
             <div class="flex justify-start items-center space-x-2 mb-2">
-                <h5 class="mb-2 text-base font-bold">User (Username): </h5>
-                <h1 class="mb-2 text-sm font-bold text-slate-400">{{ $order->user->name }}</h1>
+                <h5 class="mb-2 text-sm font-bold">User (Username): </h5>
+                <h1 class="mb-2 text-xs font-bold text-darkgreyColor">{{ $order->user->name }}</h1>
             </div>
             <div class="flex justify-start items-center space-x-2 mb-2">
-                <h5 class="mb-2 text-base font-bold">Total Order Price: </h5>
-                <h1 class="mb-2 text-sm font-bold text-slate-400">${{ $order->total_price }}</h1>
+                <h5 class="mb-2 text-sm font-bold">Total Order Price: </h5>
+                <h1 class="mb-2 text-xs font-bold text-darkgreyColor">${{ $order->total_price }}</h1>
             </div>
         </div>
     </div>

@@ -1,11 +1,12 @@
-@props(['product'])
+@props(['product', 'link' => 'true'])
 
-<a href="{{ route('products.show', ['product' => $product]) }}">
-    <form action="{{ route('cart.store') }}" method="POST" class="shadow border rounded-xl bg-white w-full h-50 sm:w-72">
+<a @if ($link == 'true') href="{{ route('products.show', ['product' => $product]) }}" @endif>
+    <form action="{{ route('cart.store') }}" method="POST"
+        class="shadow border rounded-xl bg-whiteColor w-full h-50 sm:w-72">
         @csrf
 
         <div class="h-64 sm:h-52">
-            <img src="{{ asset('images/product-img/1.png') }}" alt="product-img"
+            <img src="{{ asset('images/product-img/2.png') }}" alt="product-img"
                 class="object-cover w-full h-full rounded-lg">
         </div>
         <div class="p-4">
@@ -27,12 +28,14 @@
 
                 <x-form.error name="size_{{ $product->id }}" />
             </div>
-            <div class="flex justify-between items-center">
-                <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                <x-form.button>Add to Cart</x-form.button>
-                <i class="fa-regular fa-heart"></i>
-            </div>
+            @if ($link == 'true')
+                <div class="flex justify-between items-center">
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <x-form.button>Add to Cart</x-form.button>
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+            @endif
         </div>
     </form>
 </a>

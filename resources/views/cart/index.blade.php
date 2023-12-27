@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="flex flex-col space-y-2 items-start">
                                         <span class="text-sm sm:text-lg">{{ $item->product->name }}</span>
-                                        <span class="text-sm text-slate-300">{{ $item->size->name }}</span>
+                                        <span class="text-sm text-darkgreyColor">{{ $item->size->name }}</span>
                                     </div>
                                 </td>
                                 <td class="text-center px-6 py-4">
@@ -38,7 +38,7 @@
                                                 <input type="hidden" name="action" value="sub">
                                                 <x-form.button>-</x-form.button>
                                             </form>
-                                            <span class="text-sm text-slate-300">{{ $item->quantity }}</span>
+                                            <span class="text-sm text-darkgreyColor">{{ $item->quantity }}</span>
                                             <form action="{{ route('cart.update', ['cartitem' => $item]) }}"
                                                 method="post">
                                                 @csrf
@@ -61,16 +61,16 @@
             </div>
             <div class="w-auto shadow-md rounded-lg p-4 flex flex-col justify-center">
                 <div class="flex justify-between items-center space-x-16 mb-2">
-                    <h1 class="text-lg text-slate-300">Subtotal</h1>
+                    <h1 class="text-lg text-darkgreyColor">Subtotal</h1>
                     <span class="text-sm">${{ $totalPrice }}</span>
                 </div>
                 <div class="flex justify-between items-center space-x-16 mb-2">
-                    <h1 class="text-sm text-slate-300">Shipping Cost</h1>
+                    <h1 class="text-sm text-darkgreyColor">Shipping Cost</h1>
                     <span class="text-sm">${{ $shippingPrice }}</span>
                 </div>
                 <hr>
                 <div class="flex justify-between items-center space-x-16 mt-2">
-                    <h1 class="text-lg text-slate-300">Subtotal</h1>
+                    <h1 class="text-lg text-darkgreyColor">Subtotal</h1>
                     <span class="text-sm">${{ $totalPrice + $shippingPrice }}</span>
                 </div>
                 <form action="{{ route('orders.store') }}" method="POST" class="self-center">

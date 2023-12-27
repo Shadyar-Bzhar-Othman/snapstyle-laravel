@@ -32,11 +32,11 @@ use App\Http\Controllers\OrderController;
 
 
 // All type of user can access it
-// Website routes - %0 Complete
+// Website routes
 Route::get('/', [PageController::class, 'home'])->name('home');
 
 
-// Products - %40 Complete
+// Products 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
@@ -44,12 +44,12 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 
 // Only guest user can access it
 Route::middleware("guest")->group(function () {
-    // Session - %90 Complete
+    // Session 
     Route::get('/login', [SessionController::class, 'create'])->name('login');
     Route::post('/login', [SessionController::class, 'store'])->name('login');
 
 
-    // Register - %90 Complete
+    // Register 
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register');
 });
@@ -58,7 +58,7 @@ Route::middleware("guest")->group(function () {
 
 // Only auth user can access it
 Route::middleware("auth")->group(function () {
-    // Cart - %90 Complete
+    // Cart 
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
@@ -68,7 +68,7 @@ Route::middleware("auth")->group(function () {
     Route::delete('/cart/{cartitem}', [CartController::class, 'destroy'])->name('cart.delete');
 
 
-    // Orders - %30 Complete
+    // Orders 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
@@ -83,10 +83,10 @@ Route::middleware("auth")->group(function () {
 
 // Only admin can access it
 Route::middleware("can:admin")->group(function () {
-    // Dashboard - %0 Complete
+    // Dashboard
     Route::get("/dashboard", [PageController::class, "dashboard"])->name('dashboard');
 
-    // Users Admin - %5 Complete
+    // Users Admin
     Route::get("/dashboard/users", [AdminUserController::class, "index"])->name('dashboard.users.index');
 
     Route::get("/dashboard/users/create", [AdminUserController::class, "create"])->name('dashboard.users.create');
@@ -98,7 +98,7 @@ Route::middleware("can:admin")->group(function () {
     Route::delete("/dashboard/users/{user}", [AdminUserController::class, "destroy"])->name('dashboard.users.delete');
 
 
-    // Products Admin - %10 Complete
+    // Products Admin 
     Route::get("/dashboard/products", [AdminProductController::class, "index"])->name('dashboard.products.index');
 
     Route::get("/dashboard/products/create", [AdminProductController::class, "create"])->name('dashboard.products.create');
@@ -110,7 +110,7 @@ Route::middleware("can:admin")->group(function () {
     Route::delete("/dashboard/products/{product}", [AdminProductController::class, "destroy"])->name('dashboard.products.delete');
 
 
-    // Product Sizes Admin - %10 Complete
+    // Product Sizes Admin 
     Route::get("/dashboard/productsizes/create/{product}", [AdminProductSizeController::class, "create"])->name('dashboard.productsizes.create');
     Route::post("/dashboard/productsizes/", [AdminProductSizeController::class, "store"])->name('dashboard.productsizes.store');
 
@@ -120,7 +120,7 @@ Route::middleware("can:admin")->group(function () {
     Route::delete("/dashboard/productsizes/{productsize}", [AdminProductSizeController::class, "destroy"])->name('dashboard.productsizes.delete');
 
 
-    // Sizes Admin - %10 Complete
+    // Sizes Admin 
     Route::get("/dashboard/sizes", [AdminSizeController::class, "index"])->name('dashboard.sizes.index');
 
     Route::get("/dashboard/sizes/create", [AdminSizeController::class, "create"])->name('dashboard.sizes.create');
@@ -132,7 +132,7 @@ Route::middleware("can:admin")->group(function () {
     Route::delete("/dashboard/sizes/{size}", [AdminSizeController::class, "destroy"])->name('dashboard.sizes.delete');
 
 
-    // Categories Admin - %5 Complete
+    // Categories Admin
     Route::get("/dashboard/categories", [AdminCategoryController::class, "index"])->name('dashboard.categories.index');
 
     Route::get("/dashboard/categories/create", [AdminCategoryController::class, "create"])->name('dashboard.categories.create');
@@ -144,7 +144,7 @@ Route::middleware("can:admin")->group(function () {
     Route::delete("/dashboard/categories/{category}", [AdminCategoryController::class, "destroy"])->name('dashboard.categories.delete');
 
 
-    // SubCategories Admin - %5 Complete
+    // SubCategories Admin
     Route::get("/dashboard/subcategories", [AdminSubCategoryController::class, "index"])->name('dashboard.subcategories.index');
 
     Route::get("/dashboard/subcategories/create", [AdminSubCategoryController::class, "create"])->name('dashboard.subcategories.create');
@@ -155,7 +155,7 @@ Route::middleware("can:admin")->group(function () {
 
     Route::delete("/dashboard/subcategories/{subcategory}", [AdminSubCategoryController::class, "destroy"])->name('dashboard.subcategories.delete');
 
-    // Orders Admin - %0 Complete
+    // Orders Admin
     Route::get("/dashboard/orders", [AdminOrderController::class, "index"])->name('dashboard.orders.index');
     Route::get("/dashboard/orders/{order}", [AdminOrderController::class, "show"])->name('dashboard.orders.show');
 

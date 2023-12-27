@@ -16,60 +16,76 @@
 </head>
 
 <body>
-    <div class="flex w-screen h-screen bg-gray-100">
-        <nav class="w-auto sm:w-64 shadow text-white p-3 rounded-tr-xl rounded-br-xl">
-            <h1 class="text-2xl text-primaryColor font-bold mb-2"><a href="{{ route('home') }}">SnapStyle</a></h1>
-            <ul class="space-y-2 w-full">
-                <li
-                    class="transition-all duration-500 ease-in-out p-1 w-full rounded text-black hover:bg-primaryColor hover:text-white
+    <div x-data="{ open: true }" class="flex w-screen h-screen bg-whiteColor">
+        <button @click="open = !open" class="absolute top-2 right-2 text-2xl text-primaryColor focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                </path>
+            </svg>
+        </button>
+
+        <nav x-show="open" @click.away="open = false"
+            class="flex flex-col justify-between items-start w-auto sm:w-64 shadow text-whiteColor p-3 rounded-tr-xl rounded-br-xl">
+            <div class="w-full">
+                <h1 class="text-2xl text-primaryColor font-bold mb-2"><a href="{{ route('home') }}">SnapStyle</a></h1>
+                <ul class="space-y-2 w-full">
+                    <li
+                        class="transition-all duration-500 ease-in-out p-1 w-full rounded text-blackColor hover:bg-primaryColor hover:text-whiteColor
                     @if (request()->routeIs('dashboard')) text-primaryColor @endif">
-                    <a href="{{ route('dashboard') }}" class="text-base text-inherit">
-                        Dashboard
-                    </a>
-                </li>
-                <li
-                    class="transition-all duration-500 ease-in-out p-1 w-full rounded text-black hover:bg-primaryColor hover:text-white
+                        <a href="{{ route('dashboard') }}" class="text-base text-inherit">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li
+                        class="transition-all duration-500 ease-in-out p-1 w-full rounded text-blackColor hover:bg-primaryColor hover:text-whiteColor
                     @if (request()->routeIs('dashboard.users.index')) text-primaryColor @endif">
-                    <a href="{{ route('dashboard.users.index') }}" class="text-base text-inherit">
-                        Users
-                    </a>
-                </li>
-                <li
-                    class="transition-all duration-500 ease-in-out p-1 w-full rounded text-black hover:bg-primaryColor hover:text-white
+                        <a href="{{ route('dashboard.users.index') }}" class="text-base text-inherit">
+                            Users
+                        </a>
+                    </li>
+                    <li
+                        class="transition-all duration-500 ease-in-out p-1 w-full rounded text-blackColor hover:bg-primaryColor hover:text-whiteColor
                     @if (request()->routeIs('dashboard.products.index')) text-primaryColor @endif">
-                    <a href="{{ route('dashboard.products.index') }}" class="text-base text-inherit">
-                        Products
-                    </a>
-                </li>
-                <li
-                    class="transition-all duration-500 ease-in-out p-1 w-full rounded text-black hover:bg-primaryColor hover:text-white
+                        <a href="{{ route('dashboard.products.index') }}" class="text-base text-inherit">
+                            Products
+                        </a>
+                    </li>
+                    <li
+                        class="transition-all duration-500 ease-in-out p-1 w-full rounded text-blackColor hover:bg-primaryColor hover:text-whiteColor
                     @if (request()->routeIs('dashboard.sizes.index')) text-primaryColor @endif">
-                    <a href="{{ route('dashboard.sizes.index') }}" class="text-base text-inherit">
-                        Sizes
-                    </a>
-                </li>
-                <li
-                    class="transition-all duration-500 ease-in-out p-1 w-full rounded text-black hover:bg-primaryColor hover:text-white
+                        <a href="{{ route('dashboard.sizes.index') }}" class="text-base text-inherit">
+                            Sizes
+                        </a>
+                    </li>
+                    <li
+                        class="transition-all duration-500 ease-in-out p-1 w-full rounded text-blackColor hover:bg-primaryColor hover:text-whiteColor
                     @if (request()->routeIs('dashboard.categories.index')) text-primaryColor @endif">
-                    <a href="{{ route('dashboard.categories.index') }}" class="text-base text-inherit">
-                        Category
-                    </a>
-                </li>
-                <li
-                    class="transition-all duration-500 ease-in-out p-1 w-full rounded text-black hover:bg-primaryColor hover:text-white
+                        <a href="{{ route('dashboard.categories.index') }}" class="text-base text-inherit">
+                            Category
+                        </a>
+                    </li>
+                    <li
+                        class="transition-all duration-500 ease-in-out p-1 w-full rounded text-blackColor hover:bg-primaryColor hover:text-whiteColor
                     @if (request()->routeIs('dashboard.subcategories.index')) text-primaryColor @endif">
-                    <a href="{{ route('dashboard.subcategories.index') }}" class="text-base text-inherit">
-                        Sub Category
-                    </a>
-                </li>
-                <li
-                    class="transition-all duration-500 ease-in-out p-1 w-full rounded text-black hover:bg-primaryColor hover:text-white
+                        <a href="{{ route('dashboard.subcategories.index') }}" class="text-base text-inherit">
+                            Sub Category
+                        </a>
+                    </li>
+                    <li
+                        class="transition-all duration-500 ease-in-out p-1 w-full rounded text-blackColor hover:bg-primaryColor hover:text-whiteColor
                     @if (request()->routeIs('dashboard.orders.index')) text-primaryColor @endif">
-                    <a href="{{ route('dashboard.orders.index') }}" class="text-base text-inherit">
-                        Orders
-                    </a>
-                </li>
-            </ul>
+                        <a href="{{ route('dashboard.orders.index') }}" class="text-base text-inherit">
+                            Orders
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <form action="{{ route('logout') }}" method="POST" class="mb-16">
+                @csrf
+
+                <x-form.button>Logout</x-form.button>
+            </form>
         </nav>
 
         <main class="flex-1 p-8 overflow-auto">
