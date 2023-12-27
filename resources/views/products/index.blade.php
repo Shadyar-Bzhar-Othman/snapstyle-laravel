@@ -41,7 +41,7 @@
         </div>
 
         <div class="w-full rounded p-2">
-            <div class="mb-8 flex flex-col gap-4 items-center sm:items-start justify-center sm:flex-row  sm:flex-wrap">
+            <div class="mb-8 flex flex-col gap-4 items-center sm:items-start justify-center sm:flex-row flex-wrap">
                 @if (count($products))
                     @foreach ($products as $product)
                         <x-cards.product :product="$product" />

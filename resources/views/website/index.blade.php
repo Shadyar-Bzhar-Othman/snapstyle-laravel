@@ -11,16 +11,16 @@
             </div>
         </div>
         <div class="flex justify-center items-center">
-            <a href="{{ route('products.index') }}" class="my-4"><x-form.button class="text-1xl sm:text-3xl">Shop
+            <a href="{{ route('products.index') }}" class="my-4"><x-form.button class="text-1xl md:text-3xl">Shop
                     Now</x-form.button></a>
         </div>
         <div
-            class="flex-col sm:flex-row flex justify-center sm:justify-between items-center space-y-4 sm:space-y-0 px-4">
+            class="flex-col md:flex-row flex justify-center md:justify-between items-center space-y-4 md:space-y-0 px-4">
             <div class="mb-2">
                 <img src="{{ asset('images/1.png') }}" alt="img">
             </div>
             <h1
-                class="self-center text-2xl sm:text-5xl font-bold text-center border border-blackColor rounded-full p-12">
+                class="self-center ml-0 md:ml-32 text-2xl md:text-5xl font-bold text-center border border-blackColor rounded-full p-12">
                 SITEWIDE SALE
             </h1>
             <div class="self-center">
@@ -30,7 +30,7 @@
     </div>
     <div class="bg-gray-50 py-2 px-4">
         <h1 class="text-3xl font-bold text-primaryColor mb-2">Populer Products</h1>
-        <div class="flex justify-start items-start gap-4 flex-wrap w-full">
+        <div class="flex justify-center sm:justify-start items-center sm:items-start gap-4 flex-wrap">
             @foreach ($products as $product)
                 <x-cards.product :product="$product" link="false" />
             @endforeach

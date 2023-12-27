@@ -1,7 +1,7 @@
 <x-layouts.main>
     <div class="flex-col justify-center sm:flex-row flex sm:justify-start items-center">
-        <div class="max-h-screen mb-4">
-            <img src="{{ asset('images/product-img/1.png') }}" alt="product-img"
+        <div class="max-h-screen mb-4" style="max-width:400px;width:auto">
+            <img src="{{ asset('storage/' . $product->image) }}" alt="product-img"
                 class="object-cover w-full h-full rounded-lg">
         </div>
         <div class="flex flex-col justify-center items-start ml-8">

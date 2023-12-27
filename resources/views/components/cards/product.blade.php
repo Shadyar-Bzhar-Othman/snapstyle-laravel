@@ -1,14 +1,16 @@
 @props(['product', 'link' => 'true'])
 
-<a @if ($link == 'true') href="{{ route('products.show', ['product' => $product]) }}" @endif>
+<a @if ($link == 'true') href="{{ route('products.show', ['product' => $product]) }}" @endif class="grow"
+    style="max-width: 290px;max-height: 600px;width: 100%;height: auto;">
     <form action="{{ route('cart.store') }}" method="POST"
         class="shadow border rounded-xl bg-whiteColor w-full h-50 sm:w-72">
         @csrf
 
-        <div class="h-64 sm:h-52">
-            <img src="{{ asset('images/product-img/2.png') }}" alt="product-img"
+        <div class="h-40 sm:h-52 flex items-center justify-center">
+            <img src="{{ asset('storage/' . $product->image) }}" alt="product-img"
                 class="object-cover w-full h-full rounded-lg">
         </div>
+
         <div class="p-4">
             <div class="mb-1">
                 <span class="text-sm">{{ $product->category->name }} - {{ $product->subcategory->name }}</span>

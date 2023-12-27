@@ -1,7 +1,9 @@
 <x-layouts.dashboard>
-    <x-form.form heading="Add Product" action="{{ route('dashboard.products.store') }}" method="POST">
+    <x-form.form heading="Add Product" action="{{ route('dashboard.products.store') }}" method="POST"
+        enctype="multipart/form-data">
         <x-form.input name="name" />
         <x-form.textfield name="description" />
+        <x-form.input name="image" type="file" />
         <x-form.field>
             <x-form.label name="category" />
             <select name="category" id="category"

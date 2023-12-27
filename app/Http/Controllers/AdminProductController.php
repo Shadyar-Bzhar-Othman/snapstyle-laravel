@@ -8,6 +8,8 @@ use App\Models\SubCategory;
 use App\Models\Size;
 use App\Models\Product;
 use App\Models\ProductSize;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class AdminProductController extends Controller
 {
@@ -33,12 +35,19 @@ class AdminProductController extends Controller
             [
                 'name' => ["required", "min:2", "max:255"],
                 'description' => ["required", "min:2"],
+                'image' => ["required", "image"],
                 'category' => ["required"],
                 'sizes' => ["required", "array"],
                 'quantities' => ["required", "array"],
                 'price' => ["required", "integer"],
             ],
         );
+
+        $path = $request->file('image')->store('products', "public");
+
+        if (!$path) {
+            throw ValidationException::withMessages(["error", "Unable to store the image. Please try again later"]);
+        }
 
         $subcategory_id = $request->category;
         $category_id = SubCategory::where("id", $subcategory_id)->first()->category_id;
@@ -49,6 +58,7 @@ class AdminProductController extends Controller
             "name" => $request->name,
             "description" => $request->description,
             "price" => $request->price,
+            "image" => $path,
         ]);
 
         $sizes = $request->sizes;
@@ -81,10 +91,23 @@ class AdminProductController extends Controller
             [
                 'name' => ["required", "min:2", "max:255"],
                 'description' => ["required", "min:2"],
+                'image' => ["required", "image"],
                 'category' => ["required"],
                 'price' => ["required", "integer"],
             ],
         );
+
+        $path = $request->file('image')->store('products', "public");
+
+        if (!$path) {
+            throw ValidationException::withMessages(["error", "Unable to store the image. Please try again later"]);
+        }
+
+        $oldImagePath = $product->image;
+
+        if ($oldImagePath) {
+            Storage::disk('public')->delete($oldImagePath);
+        }
 
         $subcategory_id = $request->category;
         $category_id = SubCategory::where("id", $subcategory_id)->first()->category_id;
@@ -95,6 +118,7 @@ class AdminProductController extends Controller
             "name" => $request->name,
             "description" => $request->description,
             "price" => $request->price,
+            "image" => $path,
         ]);
 
         return redirect()->route('dashboard.products.index')->with('success', 'Product updated successfully!');

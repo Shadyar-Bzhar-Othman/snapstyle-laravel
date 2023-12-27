@@ -16,7 +16,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
     <nav x-data="{ open: false }" class="flex justify-between items-center px-12 py-4">
         <div>
             <h1 class="text-2xl font-bold"><a href="{{ route('home') }}">SnapStyle</a></h1>
@@ -160,7 +160,7 @@
         </div>
     </nav>
 
-    <main class="@if ($pd == 'true') px-12 @endif py-6">
+    <main class="@if ($pd == 'true') px-12 @endif py-6 grow">
         {{ $slot }}
     </main>
 

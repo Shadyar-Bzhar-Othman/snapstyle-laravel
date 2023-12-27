@@ -50,7 +50,7 @@ class AdminUserController extends Controller
     {
         $request->validate([
             'name' => ["required", "min:2", "max:255"],
-            'email' => ["required", "email", Rule::unique("users", "email")],
+            'email' => ["required", "email", Rule::unique("users", "email")->ignore($user->id)],
             'password' => ["required", "min:8", "max:255"],
             'role' => ["required"],
         ]);

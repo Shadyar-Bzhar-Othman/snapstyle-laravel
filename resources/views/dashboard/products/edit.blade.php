@@ -1,8 +1,14 @@
 <x-layouts.dashboard>
     <x-form.form heading="Update Product" action="{{ route('dashboard.products.update', ['product' => $product]) }}"
-        method="POST" type="PATCH">
+        method="POST" type="PATCH" enctype="multipart/form-data">
         <x-form.input name="name" :value="$product->name" />
         <x-form.textfield name="description" :value="$product->description" />
+        <div class="flex justify-between items-center space-x-2">
+            <x-form.input name="image" type="file" />
+            <div class="w-64">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="img" class="object-cover rounded">
+            </div>
+        </div>
         <x-form.field>
             <x-form.label name="category" />
             <select name="category" id="category"

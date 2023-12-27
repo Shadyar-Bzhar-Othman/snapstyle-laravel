@@ -16,7 +16,7 @@
                             <tr class="bg-white border-b ">
                                 <td class="flex items-center w-auto space-x-2 px-6 py-4">
                                     <div class="hidden sm:flex">
-                                        <img src="{{ asset('images/product-img/1.png') }}" alt="product-img"
+                                        <img src="{{ asset('storage/' . $item->product->image) }}" alt="product-img"
                                             width="100px" height="100px" class="object-cover rounded-lg">
                                     </div>
                                     <div class="flex flex-col space-y-2 items-start">
