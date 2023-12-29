@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\SubCategory;
-use App\Models\Size;
-use App\Models\Product;
-use App\Models\ProductSize;
 use Illuminate\Validation\Rule;
 
 class AdminCategoryController extends Controller

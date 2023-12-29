@@ -47,6 +47,8 @@ composer install
 
 **Step 3:**
 
+Create a database (mysql) named (SnapStyle) and the execute the following command to setup the database:
+
 ```
 php artisan migrate --seed
 ```

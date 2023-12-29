@@ -22,10 +22,14 @@ class AdminProductController extends Controller
 
     public function create()
     {
+        $categories = Category::latest()->get();
+        $subcategories = SubCategory::latest()->get();
+        $sizes = Size::latest()->get();
+
         return view("dashboard.products.create", [
-            'categories' => Category::latest()->get(),
-            'subcategories' => SubCategory::latest()->get(),
-            'sizes' => Size::latest()->get(),
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'sizes' => $sizes,
         ]);
     }
 
@@ -43,11 +47,8 @@ class AdminProductController extends Controller
             ],
         );
 
-        $path = $request->file('image')->store('products', "public");
-
-        if (!$path) {
-            throw ValidationException::withMessages(["error", "Unable to store the image. Please try again later"]);
-        }
+        // Upload Image to products directory and return the path if it's successful
+        $path = $this->uploadImage();
 
         $subcategory_id = $request->category;
         $category_id = SubCategory::where("id", $subcategory_id)->first()->category_id;
@@ -61,8 +62,16 @@ class AdminProductController extends Controller
             "image" => $path,
         ]);
 
-        $sizes = $request->sizes;
-        $quantities = $request->quantities;
+        // Create Product Size For Each Product
+        $this->createProductSizeForEachProduct($product);
+
+        return redirect()->route('dashboard.products.index')->with('success', 'Product added successfully!');
+    }
+
+    public function createProductSizeForEachProduct(Product $product)
+    {
+        $sizes = request()->sizes;
+        $quantities = request()->quantities;
 
         foreach ($sizes as $size => $value) {
             ProductSize::create([
@@ -71,41 +80,58 @@ class AdminProductController extends Controller
                 "quantity" => $quantities[$size],
             ]);
         }
-
-        return redirect()->route('dashboard.products.index')->with('success', 'Product added successfully!');
     }
 
-    public function edit(Product $product)
+    public function uploadImage()
     {
-        return view("dashboard.products.edit", [
-            'product' => $product,
-            'productsizes' => ProductSize::with(["product", "size"])->where("product_id", $product->id)->latest()->get(),
-            'categories' => Category::latest()->get(),
-            'subcategories' => SubCategory::latest()->get(),
-        ]);
-    }
+        if (!request()->hasFile('image')) {
+            return null;
+        }
 
-    public function update(Request $request, Product $product)
-    {
-        $this->validate($request,
-            [
-                'name' => ["required", "min:2", "max:255"],
-                'description' => ["required", "min:2"],
-                'image' => ["required", "image"],
-                'category' => ["required"],
-                'price' => ["required", "integer"],
-            ],
-        );
-
-        $path = $request->file('image')->store('products', "public");
+        $path = request()->file('image')->store('products', "public");
 
         if (!$path) {
             throw ValidationException::withMessages(["error", "Unable to store the image. Please try again later"]);
         }
 
+        return $path;
+    }
+
+    public function edit(Product $product)
+    {
+        $productsizes = ProductSize::with(["product", "size"])->where("product_id", $product->id)->latest()->get();
+        $categories = Category::latest()->get();
+        $subcategories = SubCategory::latest()->get();
+
+        return view("dashboard.products.edit", [
+            'product' => $product,
+            'productsizes' => $productsizes,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+        ]);
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $request->validate(
+            [
+                'name' => ["required", "min:2", "max:255"],
+                'description' => ["required", "min:2"],
+                'image' => ["image"],
+                'category' => ["required"],
+                'price' => ["required", "integer"],
+            ],
+        );
+
+        // If there's a new image delete old one if not just upload the old one
+
         $oldImagePath = $product->image;
 
-        if ($oldImagePath) {
+        $newImagePath = $this->uploadImage();
+
+        $path = $newImagePath ?? $oldImagePath;
+
+        if ($oldImagePath && $newImagePath) {
             Storage::disk('public')->delete($oldImagePath);
         }
 

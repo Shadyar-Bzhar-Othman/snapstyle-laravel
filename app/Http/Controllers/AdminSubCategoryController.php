@@ -11,16 +11,21 @@ class AdminSubCategoryController extends Controller
 {
     public function index()
     {
+        $categories = Category::latest()->get();
+        $subcategories = SubCategory::latest()->get();
+
         return view("dashboard.subcategories.index", [
-            'categories' => Category::latest()->get(),
-            'subcategories' => SubCategory::latest()->get(),
+            'categories' => $categories,
+            'subcategories' => $subcategories,
         ]);
     }
 
     public function create()
     {
+        $categories = Category::latest()->get();
+
         return view("dashboard.subcategories.create", [
-            'categories' => Category::latest()->get(),
+            'categories' => $categories,
         ]);
     }
 
@@ -41,8 +46,10 @@ class AdminSubCategoryController extends Controller
 
     public function edit(SubCategory $subcategory)
     {
+        $categories = Category::latest()->get();
+
         return view("dashboard.subcategories.edit", [
-            'categories' => Category::latest()->get(),
+            'categories' => $categories,
             'subcategory' => $subcategory,
         ]);
     }

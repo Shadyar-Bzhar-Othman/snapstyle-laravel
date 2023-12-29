@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\SubCategory;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -17,16 +16,18 @@ class ProductController extends Controller
             ->filterBySubcategories($selectedSubcategories)
             ->latest()->paginate(10)->withQueryString();
 
+        $categories = Category::all();
+        $subcategories = SubCategory::withCount('products')->get();
+
         return view('products.index', [
             'products' => $products,
-            'categories' => Category::all(),
-            'subcategories' => SubCategory::withCount('products')->get(),
+            'categories' => $categories,
+            'subcategories' => $subcategories,
         ]);
     }
 
     public function show(Product $product)
     {
-        // Complete it
         return view('products.show', ['product' => $product]);
     }
 }

@@ -10,8 +10,10 @@ class AdminUserController extends Controller
 {
     public function index()
     {
+        $users = User::latest()->get();
+
         return view("dashboard.users.index", [
-            'users' => User::latest()->get(),
+            'users' => $users,
         ]);
     }
 

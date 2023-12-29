@@ -21,10 +21,13 @@ class AdminOrderController extends Controller
 
     public function show(Order $order)
     {
+        $orderItemForOrder = OrderItem::with(["product", "size"])->where("order_id", $order->id)->latest()->get();
+        $states = State::latest()->get();
+
         return view("dashboard.orders.show", [
             'order' => $order,
-            'orderitems' => OrderItem::with(["product", "size"])->where("order_id", $order->id)->latest()->get(),
-            'states' => State::latest()->get(),
+            'orderitems' => $orderItemForOrder,
+            'states' => $states,
         ]);
     }
 

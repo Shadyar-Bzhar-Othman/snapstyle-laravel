@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Http\Request;
@@ -35,9 +34,11 @@ class CartController extends Controller
             });
         }
 
+        $shippingPrice = 5;
+
         return view("cart.index", [
             'items' => $cartItems,
-            'shippingPrice' => '5',
+            'shippingPrice' => $shippingPrice,
             'totalPrice' => $totalPrice,
         ]);
     }

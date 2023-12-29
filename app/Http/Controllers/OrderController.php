@@ -9,7 +9,6 @@ use App\Models\OrderItem;
 use App\Models\State;
 use App\Models\Cart;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
 
 class OrderController extends Controller
 {
@@ -17,19 +16,24 @@ class OrderController extends Controller
     public function index()
     {
         $state = request()->input("state");
+        $orders = Order::with(["user", "state"])->where("user_id", auth()->user()->id)->filter($state)->latest()->paginate(10)->withQueryString();
+        $states = State::latest()->get();
 
         return view("orders.index", [
-            'orders' => Order::with(["user", "state"])->where("user_id", auth()->user()->id)->filter($state)->latest()->paginate(10)->withQueryString(),
-            'states' => State::latest()->get(),
+            'orders' => $orders,
+            'states' => $states,
         ]);
     }
 
     public function show(Order $order)
     {
+        $orderitems = OrderItem::with(["product", "size"])->where("order_id", $order->id)->latest()->get();
+        $states = State::latest()->get();
+
         return view("orders.show", [
             'order' => $order,
-            'orderitems' => OrderItem::with(["product", "size"])->where("order_id", $order->id)->latest()->get(),
-            'states' => State::latest()->get(),
+            'orderitems' => $orderitems,
+            'states' => $states,
         ]);
     }
 

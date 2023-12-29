@@ -10,8 +10,10 @@ class AdminSizeController extends Controller
 {
     public function index()
     {
+        $sizes = Size::latest()->get();
+
         return view("dashboard.sizes.index", [
-            'sizes' => Size::latest()->get(),
+            'sizes' => $sizes,
         ]);
     }
 

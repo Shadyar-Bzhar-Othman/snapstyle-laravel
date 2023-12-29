@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+        // All these data are custom so don't touch it unless you know how all things organized
+
         // User
         User::factory()->create([
             'name' => "Shadyar",
