@@ -34,7 +34,7 @@ To run the website locally, follow these steps:
 Download or clone this repo by using the link below:
 
 ```
-https://github.com/Shadyar-Bzhar-Othman/SnapStyle.git
+https://github.com/Shadyar-Bzhar-Othman/SnapStyle-laravel.git
 ```
 
 **Step 2:**
