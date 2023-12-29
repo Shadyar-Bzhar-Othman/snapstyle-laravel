@@ -18,9 +18,9 @@ SnapStyle Website is a Laravel-based project that utilizes Tailwind CSS for styl
 
 | ![](public/images/readme/5.PNG) | ![](public/images/readme/6.PNG) |
 | :-----------------------------: | :-----------------------------: |
-| ![](public/images/readme/7.PNG) | ![](public/images/readme/8.PNG) |
+| ![](public/images/readme/7.PNG) | ![](public/images/readme/9.PNG) |
 
-| ![](public/images/readme/9.PNG) | ![](public/images/readme/10.PNG) |
+| ![](public/images/readme/8.PNG) | ![](public/images/readme/10.PNG) |
 | :-----------------------------: | :------------------------------: |
 
 -   [Watch the video](https://drive.google.com/file/d/1nQQeSL5EpP6vtOGYtK3PjKGtoxyDL1tT/view?usp=sharing)
